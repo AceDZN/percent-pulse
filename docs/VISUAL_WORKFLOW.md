@@ -2,7 +2,7 @@
 
 Latest human instruction, 24 October 2026: generate gameplay images with the imagegen skill, derive Chrome/Tripo models, build the real 3D game, and review the implementation against the planned screenshots. This supplements the distinct game handoff and exact public-repo/main/Chrome-Tripo requirements.
 
-1. Inspect `docs/visual-targets/gameplay-v1.png` and its exact prompt in `docs/visual-targets/PROMPT.md`. It is a **generated gameplay design target**, not evidence of an implemented or tested game.
+1. Read `docs/visual-targets/manifest.json` and inspect its selected Percent Pulse image (`gameplay-v1.png`) plus the exact prompt in `docs/visual-targets/PROMPT.md`. It is a **generated gameplay design target**, not evidence of an implemented or tested game.
 2. Record the camera/framing, world scale, core action, UI hierarchy, HUD state, palette/materials, silhouettes, feedback and interaction consequences in GAME_IDENTITY.md. Keep the five genres distinct and math authoritative; report any generated-image inconsistency instead of copying it.
 3. Derive an explicit asset list. Generate required game-specific models through the user's Chrome Tripo session, matching the reference silhouette/material language. Reuse compatible already-submitted assets. Preserve exact mathematical geometry/colliders as authored code. Respect the existing two-generation initial allowance; no purchase or provider API.
 4. Build actual 3D interactions. The reference bitmap must never stand in for the playable scene or be passed off as a real screenshot. All HUD controls shown as interactive must work.
@@ -13,4 +13,3 @@ Latest human instruction, 24 October 2026: generate gameplay images with the ima
 Skill: /Users/acedzn/.codex/skills/.system/imagegen/SKILL.md. Built-in image_gen is the default and needs no API key; do not silently switch to CLI/API fallback. The root primary keyframe is generated centrally to avoid competing targets; a crew may generate one supplemental interaction state after inspecting it.
 
 No further kickoff approval is required. Existing Steam research gates stay pending; they are separate from these directly authorized games. Deployment remains a later user step.
-

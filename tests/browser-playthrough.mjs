@@ -20,8 +20,8 @@ async function movement(x,z){const next=new Set();if(x>.2)next.add('KeyD');if(x<
 let lastEncounter=0,shots=0,retries=0,guard=0,waypoint=0,dashAt=0;const route=[{x:12,z:7},{x:12,z:-7},{x:-12,z:-7},{x:-12,z:7}];const history=[];const captures=[];
 while(guard++<3500){
   const s=await state();if(s.mode==='won'){history.push({won:s});break;}
-  if(s.mode==='failed'){await movement(0,0);await page.screenshot({path:`${out}/failure-${retries}.png`});history.push({failure:s});if(++retries>3)throw new Error('More than three retries');await page.locator('#retry').click({force:true});waypoint=0;dashAt=s.time;continue;}
-  if(s.mode==='interlude'){await movement(0,0);await page.screenshot({path:`${out}/clear-${s.encounter}.png`});await advance(8100);continue;}
+  if(s.mode==='failed'){await movement(0,0);await page.waitForTimeout(150);await page.screenshot({path:`${out}/failure-${retries}.png`});history.push({failure:s});if(++retries>3)throw new Error('More than three retries');await page.locator('#retry').click({force:true});waypoint=0;dashAt=s.time;continue;}
+  if(s.mode==='interlude'){await movement(0,0);await page.waitForTimeout(150);await page.screenshot({path:`${out}/clear-${s.encounter}.png`});await advance(8100);continue;}
   if(s.mode!=='playing')throw new Error('Unexpected mode '+s.mode);
   if(s.encounter!==lastEncounter){lastEncounter=s.encounter;waypoint=0;history.push({encounter:s.encounter,ammo:s.ammo,preview:s.preview});if(s.encounter===5)assert.equal(s.preview,false);}
   let wp=route[waypoint];if(Math.hypot(s.player.x-wp.x,s.player.z-wp.z)<1.1){waypoint=(waypoint+1)%route.length;wp=route[waypoint];}
@@ -41,20 +41,20 @@ while(guard++<3500){
     if(kind==='pulse'){await page.keyboard.down('KeyQ');await advance(17);await page.keyboard.up('KeyQ');}else await page.mouse.click(screen.x,screen.y);
     shots++;await advance(0);const after=await state();
     if(s.encounter===2&&enemy.family==='anchor'&&after.receipts.at(-1)?.kind==='pulse'){
-      const r=after.receipts.at(-1);if(['72','54'].includes(r.after)){await page.screenshot({path:`docs/evidence/pulse-${r.after}.png`});captures.push(`pulse-${r.after}.png`);}}
-    if(s.encounter===4&&after.receipts.at(-1)?.boosted){await page.screenshot({path:'docs/evidence/boost-27.png'});captures.push('boost-27.png');}
-    if(s.encounter===5&&after.receipts.length>0&&!captures.includes('transfer.png')){await page.screenshot({path:'docs/evidence/transfer.png'});captures.push('transfer.png');}
+      const r=after.receipts.at(-1);if(['72','54'].includes(r.after)){await page.waitForTimeout(150);await page.screenshot({path:`docs/evidence/pulse-${r.after}.png`});captures.push(`pulse-${r.after}.png`);}}
+    if(s.encounter===4&&after.receipts.at(-1)?.boosted){await page.waitForTimeout(150);await page.screenshot({path:'docs/evidence/boost-27.png'});captures.push('boost-27.png');}
+    if(s.encounter===5&&after.receipts.length>0&&!captures.includes('transfer.png')){await page.waitForTimeout(150);await page.screenshot({path:'docs/evidence/transfer.png'});captures.push('transfer.png');}
   }
   if(s.time-dashAt>6.3&&Math.abs(s.player.x)<13&&Math.abs(s.player.z)<8){await page.keyboard.press('Space');dashAt=s.time;}
   await advance(200);
 }
-await movement(0,0);const final=await state();assert.equal(final.mode,'won');assert.equal(final.hintUses,0);await page.screenshot({path:'docs/evidence/victory.png'});history.push({final,shots,errors,failed,remote,badResponses,captures});
+await movement(0,0);const final=await state();assert.equal(final.mode,'won');assert.equal(final.hintUses,0);await page.waitForTimeout(150);await page.screenshot({path:'docs/evidence/victory.png'});history.push({final,shots,errors,failed,remote,badResponses,captures});
 // Pause/resume and restart are verified after a fresh real Start click.
 await page.locator('#again').click({force:true});await advance(400);await page.keyboard.press('Escape');const paused=await state();await advance(5000);assert.equal((await state()).time,paused.time);assert.equal(paused.mode,'paused');await page.locator('#resume').click({force:true});await advance(100);assert.ok((await state()).time>paused.time);
 await page.keyboard.press('Escape');await page.locator('#retry').click({force:true});assert.equal((await state()).player.hp,100);
-await page.setViewportSize({width:768,height:1024});await advance(0);const resized=await state();await page.screenshot({path:`${out}/tablet.png`});assert.equal(resized.encounter,1);
+await page.setViewportSize({width:768,height:1024});await advance(0);const resized=await state();await page.waitForTimeout(150);await page.screenshot({path:`${out}/tablet.png`});assert.equal(resized.encounter,1);
 await page.setViewportSize({width:1672,height:941});await advance(0);
 // Failure is reached through no movement, no modified damage or state.
-await advance(35000);assert.equal((await state()).mode,'failed');await page.screenshot({path:'docs/evidence/failure.png'});await page.locator('#retry').click({force:true});assert.equal((await state()).player.hp,100);
+await advance(35000);assert.equal((await state()).mode,'failed');await page.waitForTimeout(150);await page.screenshot({path:'docs/evidence/failure.png'});await page.locator('#retry').click({force:true});assert.equal((await state()).player.hp,100);
 await fs.writeFile(`${out}/report.json`,JSON.stringify({browser:await browser.version(),viewport:'1672x941 DPR1',history,errors,failed,remote,badResponses},null,2));
 console.log(JSON.stringify({browser:await browser.version(),mode:final.mode,encounters:final.encounter,time:final.time,retries,shots,errors,failed,remote,badResponses,captures}));await browser.close();

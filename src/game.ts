@@ -44,7 +44,7 @@ export class Game {
     this.shots.push({x:this.player.x,z:this.player.z,toX:end.x,toZ:end.z,kind,age:0});
     if(!e){this.lastMessage='החטאה: התחמושת והתגבור נשמרו.';this.messageTime=1.3;this.log('miss',{kind});return false;}
     const r=resolveStrike(e.hp,kind,this.boost.armed);this.ammo[kind]--;e.hp=r.after;e.hitFlash=.2;
-    if(r.boosted){this.boost.armed=false;this.boost.available=false;}
+    if(r.boosted){this.boost.armed=false;this.boost.available=false;this.lastMessage='התגבור הוחל על הנזק הגולמי ונוצל.';this.messageTime=2;}
     const receipt={time:+this.time.toFixed(3),target:e.id,kind,before:r.before.toString(),raw:r.raw.toString(),applied:r.applied.toString(),after:r.after.toString(),boosted:r.boosted};
     this.receipts.push(receipt);this.log('hit',receipt);if(e.hp.n===0n){this.kills++;this.log('destroyed',{target:e.id});}
     if(this.ammo.bolt===0&&this.enemies.some(e=>e.hp.n>0n))this.fail(this.ammo.pulse===0?'התחמושת נגמרה. בחרו סדר יריות חדש.':'נותרו רק יריות אחוז. הן לא מגיעות לאפס; נסו לשמור Bolt לסיום.');

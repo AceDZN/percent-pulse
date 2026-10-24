@@ -199,3 +199,50 @@ test('spending all finishers explains an unwinnable percentage-only remainder im
   assert.deepEqual(g.ammo, { bolt: 4, pulse: 2 });
   assert.equal(g.mode, 'playing');
 });
+
+test('retry scopes visible receipts to the current attempt while preserving historical events', () => {
+  const g = fixture();
+  hit(g, 0, 'bolt');
+  assert.equal(g.text().receipts.length, 1);
+  g.pause(); g.retry();
+  assert.equal(g.text().receipts.length, 0, 'previous attempt is not presented as current damage');
+  assert.ok(g.events.some(e => e.event === 'hit'), 'history remains available to the local trace');
+  hit(g, 0, 'pulse');
+  assert.equal(g.text().receipts.length, 1);
+  assert.equal(g.text().receipts[0].kind, 'pulse');
+  assert.equal(g.text().receipts[0].before, '18');
+});
+
+test('the arena constraint is an ellipse rather than a larger invisible rectangle', () => {
+  const g = fixture();
+  g.move(1, 1);
+  for (let i = 0; i < 180; i++) {
+    g.tick(1 / 60);
+    assert.ok((g.player.x / 16.1) ** 2 + (g.player.z / 11.1) ** 2 <= 1 + 1e-12);
+  }
+  const measure = (g.player.x / 16.1) ** 2 + (g.player.z / 11.1) ** 2;
+  assert.ok(measure > .999, 'movement reaches the visible ellipse boundary');
+});
+
+test('arc threats respect forward angle, radial band, and angle wraparound', () => {
+  const sample = (x: number, z: number, heading = 0) => {
+    const g = fixture();
+    // Isolate the geometric hazard subsystem from unrelated enemies and spawns.
+    g.enemies = []; g.nextHazard = Infinity;
+    g.player.x = x; g.player.z = z; g.player.invulnerable = 0;
+    g.hazards = [{ id: 0, x: 0, z: 0, radius: 5, angle: heading, width: 2.4, kind: 'arc', charge: 0, age: 1.65, duration: 1.65, hit: false }];
+    g.tick(1 / 60);
+    return g.player.hp;
+  };
+  assert.equal(sample(0, 5), 80, 'front of arc is dangerous');
+  assert.equal(sample(0, -5), 100, 'rear is outside the sector');
+  assert.equal(sample(0, 0), 100, 'center is outside its radial band');
+  assert.equal(sample(5, 0), 100, 'side is beyond the 0.85 PI angular span');
+  assert.equal(sample(0, 6.5), 80, 'player radius overlaps the outer edge');
+  assert.equal(sample(0, 6.8), 100, 'outside the radial edge plus player margin');
+  const justInside = Math.PI * .425 - .01, justOutside = Math.PI * .425 + .01;
+  assert.equal(sample(5 * Math.sin(justInside), 5 * Math.cos(justInside)), 80);
+  assert.equal(sample(5 * Math.sin(justOutside), 5 * Math.cos(justOutside)), 100);
+  const wrapped = -Math.PI + .02;
+  assert.equal(sample(5 * Math.sin(wrapped), 5 * Math.cos(wrapped), Math.PI - .02), 80, 'heading wraps across minus/plus PI');
+});

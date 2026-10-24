@@ -4,3 +4,5 @@
 [hidden]{display:none!important}
 /* Canonical image target: corner health, paired attacks, world-adjacent receipts. */
 @media(min-width:701px){.vitals{top:auto;bottom:32px;left:30px;width:230px}.vitals>b{font-size:28px}.weapons{left:auto;right:30px;transform:none;bottom:26px}.weapons button{width:155px}.weapons button>span{letter-spacing:1px}.weapons small{font-size:10px}#wave{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);font-size:21px}#wave small{display:none}#receipt{bottom:auto;max-width:240px;padding:9px 14px;border-left:2px solid var(--pink);background:#080e18e8}#receipt>bdi{font-size:23px;color:#fff}#receipt small{color:#d3a1ba}#receipt>span{color:#a6bcc9}#target{top:93px}#message{bottom:125px}}
+/* Target-anchored receipts must not stretch between top and mobile bottom. */
+#receipt{bottom:auto;max-width:min(260px,calc(100vw - 24px));height:auto}

@@ -44,6 +44,25 @@ Arena, five-sided cyan player, fast triangular skitter enemies, rings, hazard su
 
 ## Art direction
 
-Visual thesis: charcoal ceramic and bold faceted neon armor in a sparse combat amphitheatre. Cyan identifies the player and Bolt, magenta identifies hostile geometry, and warm pale highlights identify active danger. Shapes and distinct motion reinforce color cues.
+Visual thesis: charcoal stone and bold faceted neon armor in a floating ring amphitheatre. Cyan identifies the player and Bolt, magenta identifies hostile geometry, and warm pale highlights identify the skitter eye. Shapes and distinct motion reinforce color cues.
 
 Content plan: one full-canvas playable arena; HUD stays with the gameplay owner. The action plane is quiet and the arena trim provides orientation. Interaction motion: directional facing, bounded shallow camera follow, enemy hover and telegraph charging. Reduced effects removes hover and smooth camera motion.
+
+## Canonical gameplay target and implementation breakdown
+
+The generated image at `docs/visual-targets/gameplay-v1.png` is a **design reference, not a build screenshot**. Its prompt and correction are saved beside it. It arrived after this one normal Tripo task was already submitted; no retroactive claim of image-first generation is made. The crew inspected the new reference, retained the compatible magenta sentinel, and rebuilt the scene to match its composition without submitting another paid generation.
+
+| Reference element | Actual implementation |
+| --- | --- |
+| Elevated combat camera | Perspective camera about 55° above the floor; desktop distance 34; aspect-aware fit and shallow follow preserve pointer projection. |
+| Circular stone amphitheatre | An ellipse with radii 17×12, beveled stone slab sectors, deterministic local grain/cracks, and a tapered floating foundation. Four merged material batches keep floor draw calls low. |
+| Low perimeter and pink channels | 44 low stone crenellations; three procedural ellipse channels; 14 dark pylons with magenta four-sided crystals. |
+| Floating blue-black architecture | 34 faceted columns outside play, with occasional magenta channels. Foreground columns stay below the floor sightline. |
+| Agile cyan combatant | Original angular humanoid chest, shoulder wings, legs, visor and weapon; cyan saturation is tuned to remain cyan under cel lighting. |
+| Large magenta anchor | The actual Chrome-generated sentinel above a 1.25-radius targeting ring, with two compact procedural stone forearms. Generated width is normalized to 2.5 units. |
+| Pointed skitter | Original triangular/core mesh with four angled legs and a contrasting eye; its 0.72-radius state collider remains authoritative. |
+| Ground sweep arc | Exact RingGeometry span `0.85π`, radial interval `radius±width/2`, heading `atan2(dx,dz)`; strip/disc warnings remain supported. Fragments are clipped to the ellipse floor without changing authoritative collision. |
+| Cyan trail / magenta percentage impact | State-driven short beams and shrinking octahedral impact accents. The lead owns receipts and HUD placement. |
+| Current/max HP | World-space anchor label such as `72 / 96`; full skitter label `18 HP`; bar ratio uses actual current/max state. |
+
+Known fidelity limits: the static generated anchor is a hovering armored sentinel rather than the target's rigged hulking humanoid. The procedural player and skitter have simplified silhouettes. Floor detail is geometric/procedural rather than a painted rock texture. These are visible implementation differences, not claims of a pixel-identical reconstruction.
