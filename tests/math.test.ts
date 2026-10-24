@@ -150,3 +150,9 @@ test('all five finite-ammunition encounter witnesses are exact and feasible', ()
     assert.ok(bolt >= 0 && pulse >= 0);
   }
 });
+
+test('invalid negative HP is rejected rather than producing negative applied damage', () => {
+  for (const kind of ['bolt', 'pulse'] as const) {
+    assert.throws(() => strike(q(-1), kind, true), /nonnegative|negative/i);
+  }
+});

@@ -1,0 +1,10 @@
+{
+  "mode": "built-in image_gen",
+  "image": "gameplay-v1.png",
+  "sha256": "a13f983d61383d5aad35dfd52e92e358d06916395c42ef8f67017f975e556cad",
+  "selected_revision": 2,
+  "status": "visually_reviewed_design_target",
+  "not_actual_gameplay_capture": true,
+  "prompt": "PROMPT.md",
+  "review_notes": "REVIEW_NOTES.md"
+}

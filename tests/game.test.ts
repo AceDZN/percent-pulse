@@ -184,3 +184,18 @@ test('movement normalizes diagonals, respects arena bounds, and dash grants a fi
   wait(diagonal, 4);
   assert.ok(Math.abs(diagonal.player.x) <= 16.1 && Math.abs(diagonal.player.z) <= 11.1);
 });
+
+test('spending all finishers explains an unwinnable percentage-only remainder immediately', () => {
+  const g = fixture(1);
+  // All Bolts into the 96-HP anchor leave 24 HP. Both percentage charges remain,
+  // but neither a finite normal nor boosted sub-100% attack can reach zero.
+  for (let i = 0; i < 4; i++) hit(g, 0, 'bolt');
+  assert.equal(g.enemies[0].hp.toString(), '24');
+  assert.deepEqual(g.ammo, { bolt: 0, pulse: 2 });
+  assert.equal(g.mode, 'failed');
+  assert.match(g.reason, /אחוז/);
+  assert.match(g.reason, /אפס/);
+  g.retry();
+  assert.deepEqual(g.ammo, { bolt: 4, pulse: 2 });
+  assert.equal(g.mode, 'playing');
+});

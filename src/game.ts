@@ -17,12 +17,12 @@ export class Game {
   enemies:Enemy[]=[];hazards:Hazard[]=[];
   shots:{x:number;z:number;toX:number;toZ:number;kind:AttackKind;age:number}[]=[];
   ammo={bolt:2,pulse:1};boost={available:false,armed:false};cooldown=0;
-  receipts:Receipt[]=[];events:{t:number;event:string;data:unknown}[]=[];
+  receipts:Receipt[]=[];receiptStart=0;events:{t:number;event:string;data:unknown}[]=[];
   lastMessage='';messageTime=0;preview=true;effectsReduced=false;nextHazard=1.8;hazardId=0;hurtCount=0;
   log(event:string,data:unknown={}){this.events.push({t:+this.time.toFixed(3),event,data});if(this.events.length>500)this.events.shift();}
   start(){this.encounter=0;this.time=0;this.kills=0;this.retries=0;this.dashCount=0;this.hintUses=0;this.receipts=[];this.events=[];this.setup();}
   setup(){
-    const c=ENCOUNTERS[this.encounter];this.mode='playing';this.elapsed=0;this.nextHazard=1.8;this.reason='';this.cooldown=0;this.hazards=[];this.shots=[];
+    const c=ENCOUNTERS[this.encounter];this.mode='playing';this.elapsed=0;this.nextHazard=1.8;this.reason='';this.cooldown=0;this.hazards=[];this.shots=[];this.receiptStart=this.receipts.length;
     this.player={x:0,z:7,angle:Math.PI,hp:100,dashTime:0,dashCooldown:0,invulnerable:1.2};this.moveInput={x:0,z:0};
     this.ammo={bolt:c.ammo[0],pulse:c.ammo[1]};this.boost={available:this.encounter===3,armed:false};this.preview=this.encounter<4;
     this.enemies=c.hp.map((hp,i)=>({id:this.encounter*10+i+1,x:i===0?0:8,z:i===0?-5:1,angle:0,hp:new Rational(hp),maxHp:hp,family:(hp<=36?'skitter':'anchor') as Enemy['family'],phase:'pursue',telegraph:0,hitFlash:0}));
@@ -47,7 +47,7 @@ export class Game {
     if(r.boosted){this.boost.armed=false;this.boost.available=false;}
     const receipt={time:+this.time.toFixed(3),target:e.id,kind,before:r.before.toString(),raw:r.raw.toString(),applied:r.applied.toString(),after:r.after.toString(),boosted:r.boosted};
     this.receipts.push(receipt);this.log('hit',receipt);if(e.hp.n===0n){this.kills++;this.log('destroyed',{target:e.id});}
-    if(this.ammo.bolt===0&&this.ammo.pulse===0&&this.enemies.some(e=>e.hp.n>0n))this.fail('התחמושת נגמרה. בחרו סדר יריות חדש.');
+    if(this.ammo.bolt===0&&this.enemies.some(e=>e.hp.n>0n))this.fail(this.ammo.pulse===0?'התחמושת נגמרה. בחרו סדר יריות חדש.':'נותרו רק יריות אחוז. הן לא מגיעות לאפס; נסו לשמור Bolt לסיום.');
     return true;
   }
   dash(){
@@ -58,10 +58,11 @@ export class Game {
   hurt(amount:number,source:string){if(this.player.invulnerable>0)return;this.player.hp=Math.max(0,this.player.hp-amount);this.player.invulnerable=.9;this.hurtCount++;this.log('hurt',{amount,source,hp:this.player.hp});if(this.player.hp===0)this.fail('המגן נשבר. התחמקו מהאזור המסומן לפני הפגיעה.');}
   fail(reason:string){this.mode='failed';this.reason=reason;this.moveInput={x:0,z:0};this.log('failed',{reason});}
   spawnHazard(){
-    const i=this.hazardId++; const sweep=i%3!==2;
+    const i=this.hazardId++; const arc=this.encounter>0&&i%4===2;const sweep=i%4<2;
     // Sweep long axis is (sin(angle), cos(angle)); exact strip collision matches mesh.
-    const angle=i%2===0?Math.PI/2:0;
-    this.hazards.push({id:i,x:sweep?(angle===0?this.player.x:0):this.player.x,z:sweep?(angle===0?0:this.player.z):this.player.z,radius:sweep?20:2.8,angle,width:2.1,kind:sweep?'sweep':'burst',charge:0,age:0,duration:1.65,hit:false});
+    const anchor=this.enemies.find(e=>e.family==='anchor'&&e.hp.n>0n);const cx=anchor?.x||0,cz=anchor?.z||0;
+    const angle=arc?Math.atan2(this.player.x-cx,this.player.z-cz):i%2===0?Math.PI/2:0;
+    this.hazards.push({id:i,x:arc?cx:sweep?(angle===0?this.player.x:0):this.player.x,z:arc?cz:sweep?(angle===0?0:this.player.z):this.player.z,radius:arc?Math.max(4,Math.min(14,Math.hypot(this.player.x-cx,this.player.z-cz))):sweep?20:2.8,angle,width:arc?2.4:2.1,kind:arc?'arc':sweep?'sweep':'burst',charge:0,age:0,duration:1.65,hit:false});
   }
   tick(dt:number){
     if(this.mode==='interlude'){this.interlude-=dt;if(this.interlude<=0)this.next();return;}
@@ -70,7 +71,7 @@ export class Game {
     const p=this.player;p.dashCooldown=Math.max(0,p.dashCooldown-dt);p.invulnerable=Math.max(0,p.invulnerable-dt);p.dashTime=Math.max(0,p.dashTime-dt);
     let mx=this.moveInput.x,mz=this.moveInput.z;const ml=Math.hypot(mx,mz);if(ml>1){mx/=ml;mz/=ml;}
     const speed=6.3;if(p.dashTime>0){mx=this.dashVector.x*4;mz=this.dashVector.z*4;}
-    p.x=Math.max(-16.1,Math.min(16.1,p.x+mx*speed*dt));p.z=Math.max(-11.1,Math.min(11.1,p.z+mz*speed*dt));p.angle=Math.atan2(this.aim.x-p.x,this.aim.z-p.z);
+    p.x+=mx*speed*dt;p.z+=mz*speed*dt;const edge=Math.hypot(p.x/16.1,p.z/11.1);if(edge>1){p.x/=edge;p.z/=edge;}p.angle=Math.atan2(this.aim.x-p.x,this.aim.z-p.z);
     for(const e of this.enemies){if(e.hp.n===0n)continue;e.hitFlash=Math.max(0,e.hitFlash-dt);
       const dx=p.x-e.x,dz=p.z-e.z,l=Math.hypot(dx,dz)||1;e.angle=Math.atan2(dx,dz);
       const cycle=(this.elapsed+e.id*.73)%(e.family==='anchor'?7:4.5);
@@ -81,7 +82,7 @@ export class Game {
       if(l<(e.family==='anchor'?3:1.45)&&!windup)this.hurt(e.family==='anchor'?18:12,e.family);
     }
     if(this.elapsed>=this.nextHazard){this.spawnHazard();this.nextHazard=this.elapsed+Math.max(2.15,3.8-this.encounter*.27);}
-    for(const h of this.hazards){h.age+=dt;h.charge=Math.min(1,h.age/h.duration);if(h.age>=h.duration&&!h.hit){h.hit=true;const dx=p.x-h.x,dz=p.z-h.z;const side=Math.abs(dx*Math.cos(h.angle)-dz*Math.sin(h.angle));const along=Math.abs(dx*Math.sin(h.angle)+dz*Math.cos(h.angle));if(h.kind==='sweep'?(side<h.width/2+.45&&along<h.radius):Math.hypot(dx,dz)<h.radius+.4)this.hurt(20,h.kind);else this.log('avoided',{hazard:h.kind});}}
+    for(const h of this.hazards){h.age+=dt;h.charge=Math.min(1,h.age/h.duration);if(h.age>=h.duration&&!h.hit){h.hit=true;const dx=p.x-h.x,dz=p.z-h.z;const side=Math.abs(dx*Math.cos(h.angle)-dz*Math.sin(h.angle));const along=Math.abs(dx*Math.sin(h.angle)+dz*Math.cos(h.angle));const angle=Math.atan2(Math.sin(Math.atan2(dx,dz)-h.angle),Math.cos(Math.atan2(dx,dz)-h.angle));const collision=h.kind==='arc'?(Math.abs(Math.hypot(dx,dz)-h.radius)<h.width/2+.45&&Math.abs(angle)<Math.PI*.425):h.kind==='sweep'?(side<h.width/2+.45&&along<h.radius):Math.hypot(dx,dz)<h.radius+.4;if(collision)this.hurt(20,h.kind);else this.log('avoided',{hazard:h.kind});}}
     this.hazards=this.hazards.filter(h=>h.age<h.duration+.4);for(const s of this.shots)s.age+=dt;this.shots=this.shots.filter(s=>s.age<.24);
     if(this.mode!=='playing')return;
     if(this.elapsed>=ENCOUNTERS[this.encounter].duration&&this.enemies.every(e=>e.hp.n===0n)){
@@ -89,5 +90,5 @@ export class Game {
       if(this.encounter===4){this.mode='won';this.log('won');}else{this.mode='interlude';this.interlude=8;}
     }
   }
-  text(){return {coordinates:'x right, z down (+z toward camera); floor y=0; arena x±17 z±12',mode:this.mode,encounter:this.encounter+1,name:ENCOUNTERS[this.encounter].name,time:+this.time.toFixed(2),cycleRemaining:Math.max(0,+(ENCOUNTERS[this.encounter].duration-this.elapsed).toFixed(2)),player:{...this.player},aim:this.aim,enemies:this.enemies.filter(e=>e.hp.n>0n).map(e=>({...e,hp:e.hp.toNumber(),hpExact:e.hp.toString()})),hazards:this.hazards.map(h=>({...h})),ammo:this.ammo,boost:this.boost,cooldown:this.cooldown,preview:this.preview,target:this.target()?.id,receipts:this.receipts.slice(-4),kills:this.kills,dashes:this.dashCount,retries:this.retries,hintUses:this.hintUses,reason:this.reason};}
+  text(){return {coordinates:'x right, z down (+z toward camera); floor y=0; player center within exact ellipse (x/16.1)^2+(z/11.1)^2<=1; arc heading atan2(dx,dz), span 0.85PI, width radial',mode:this.mode,encounter:this.encounter+1,name:ENCOUNTERS[this.encounter].name,time:+this.time.toFixed(2),cycleRemaining:Math.max(0,+(ENCOUNTERS[this.encounter].duration-this.elapsed).toFixed(2)),player:{...this.player},aim:this.aim,enemies:this.enemies.filter(e=>e.hp.n>0n).map(e=>({...e,hp:e.hp.toNumber(),hpExact:e.hp.toString()})),hazards:this.hazards.map(h=>({...h})),ammo:this.ammo,boost:this.boost,cooldown:this.cooldown,preview:this.preview,target:this.target()?.id,receipts:this.receipts.slice(this.receiptStart).slice(-4),kills:this.kills,dashes:this.dashCount,retries:this.retries,hintUses:this.hintUses,reason:this.reason};}
 }
