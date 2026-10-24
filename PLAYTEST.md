@@ -6,7 +6,7 @@
 
 `npm test`: **27/27 pass**. Independent tests cover exact96→72→54;72HP unboosted crossover; mixed100→57 vs61.5; commuting pure factors/opposite percentages; boost raw/applied/consumption; fractions and overkill;160 positive percent-only strikes; invalid/dead targets; serialized impacts; all five finite-ammo allocations; wrong-order63/8 remainder and recovery; pause; no-input failure; changed final values/no automatic help; movement/dash; exact ellipse bounds; arc radial/angular/wraparound geometry; retry-scoped receipt logs, and immutable historical event quantities.
 
-`npm run build`: passes TypeScript and static Vite production build. Relative base, no backend/environment variables, bundled model/fonts/textures. The main JS chunk is approximately655kB (174kB gzip); Vite reports its normal500kB chunk warning. Runtime GLB is2,367,328bytes,35,988triangles. The generated output contains3,084,766bytes of files (about3.08MB;3.8MiB allocated on this filesystem). No source credentials, browser state or signed asset URLs are included.
+`npm run build`: passes TypeScript and static Vite production build. Relative base, no backend/environment variables, bundled model/fonts/textures. The main JS chunk is approximately655kB (174kB gzip); Vite reports its normal500kB chunk warning. Runtime GLB is2,367,328bytes,35,988triangles. The generated output contains3,084,765bytes of files (about3.08MB;3.8MiB allocated on this filesystem). No source credentials, browser state or signed asset URLs are included.
 
 ## Actual full production play
 

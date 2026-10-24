@@ -23,7 +23,7 @@ Independent review, 24 October 2026. The image in `visual-targets/` is a **gener
 
 ## Additional action and recovery evidence
 
-[arc-telegraph.png](evidence/arc-telegraph.png) is an actual **1672 × 941** capture reached by moving through live encounter 2 after the first Pulse. It shows the charged curved danger band while the anchor remains **72 / 96**, skitter **18 HP**, player **100 HP**, and ammo **4 / 1**. This supplies the floor-arc evidence absent from the instantaneous primary hit frame.
+[arc-telegraph.png](evidence/arc-telegraph.png) is an actual **1672 × 941** capture reached by moving through live encounter 2 after the first Pulse. It shows the charged curved danger band while the anchor remains **72 / 96**, skitter **18 HP**, player **88 HP** after contact damage, and ammo **4 / 1**. This supplies the floor-arc evidence absent from the instantaneous primary hit frame.
 
 [boost-27.png](evidence/boost-27.png) shows a confirmed next-hit boost, **18 × 1.5 = 27**, applied **27 HP**, with **0 HP** remaining on the 27-HP skitter. [failure.png](evidence/failure.png) shows a real no-input defeat and an immediate retry control. Its empty attempt receipt log does not misrepresent a prior attempt's killing shot. [transfer.png](evidence/transfer.png) records the final changed-value encounter with expected-damage preview initially disabled; the final formation is verified in the state/browser checks.
 
