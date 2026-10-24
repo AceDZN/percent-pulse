@@ -1,0 +1,11 @@
+# Percent Pulse
+
+Core verbs: move, aim, fire, choose, dash, survive. The decision is when to spend a finite 18-HP Bolt or a strike worth 25% of the target's current HP. The base changes after every confirmed impact; missed shots cost time but no ammunition. This is a real-time arena shooter, with no deliveries or answer fields.
+
+In the first minute, the player enters a live cyan/magenta arena, dashes through a clearly marked floor sweep and hits an 18-HP skitter. A containment cycle stays active while arena sweeps demand movement. The second encounter introduces a slow 96-HP anchor and a fast 18-HP skitter: two Pulses take the anchor through 72 to 54, while a Bolt removes the pursuing skitter. A short optional replay names the changing base.
+
+State changes: exact rational enemy HP; limited confirmed-hit ammunition; player HP; cooldowns; telegraph timings; position; one next-hit boost in encounter four. Five encounters share a single arena. Each has a finite active containment cycle and requires both enemy clearance and survival. This gives roughly five minutes of continuous movement and attacks, plus short interludes. Failure restarts the current encounter immediately with its original resources and a truthful recent hit log. Winning clears the final transfer pattern without a forced hint.
+
+Camera: angled overhead perspective with restrained player follow and a stable world floor for aiming. Silhouettes: cyan armored duelist, magenta angular anchors and pointed skitters. Materials: hard cel shading, charcoal floor, luminous attack traces and exact procedural rings/health bars. Generated decoration never defines collision or numerical values. Motion: anticipation before every enemy strike, quick dash trail, impact recoil and a restrained arena entrance. Sound: short synthesized attack and warning cues with a mute/volume control.
+
+Portfolio comparison: unlike Scale Shift's first-person clearance, Hypotenuse Rush's momentum traversal, Ringwarden's zone allocation and Equal & Opposite's operation duel, Percent Pulse's continuous time pressure and finite attack decisions govern every encounter. Its neon battle arena does not reuse any courier/toy-industrial language. Crew review is autonomous: the gameplay lead owns state, the visual specialist owns scene/Tripo, and the independent reviewer owns math and playability checks.
