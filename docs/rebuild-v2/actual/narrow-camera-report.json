@@ -1,0 +1,207 @@
+{
+  "browser": "155.0.8059.85",
+  "method": "Real directional key held to the movement boundary, public fixed-step clock; no state injection",
+  "checks": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "key": "ArrowRight",
+      "player": {
+        "x": 7.954431559472083,
+        "z": 2.00851772773072,
+        "angle": -2.273903949876213,
+        "hp": 100,
+        "invulnerable": 0,
+        "moving": 1
+      },
+      "screen": {
+        "x": 355.76334952724557,
+        "y": 452.7688750974363
+      },
+      "camera": {
+        "x": 0,
+        "y": 47.866486153846154,
+        "z": 33.66588923076923,
+        "elevation": 55
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "key": "ArrowLeft",
+      "player": {
+        "x": -7.954431559472083,
+        "z": 2.00851772773072,
+        "angle": 2.273903949876213,
+        "hp": 100,
+        "invulnerable": 0,
+        "moving": 1
+      },
+      "screen": {
+        "x": 34.23665047275444,
+        "y": 452.7688750974363
+      },
+      "camera": {
+        "x": 0,
+        "y": 47.866486153846154,
+        "z": 33.66588923076923,
+        "elevation": 55
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "key": "ArrowUp",
+      "player": {
+        "x": 0,
+        "z": -6.25,
+        "angle": 0,
+        "hp": 100,
+        "invulnerable": 0,
+        "moving": 1
+      },
+      "screen": {
+        "x": 195,
+        "y": 324.1256030347817
+      },
+      "camera": {
+        "x": 0,
+        "y": 47.866486153846154,
+        "z": 33.66588923076923,
+        "elevation": 55
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "key": "ArrowDown",
+      "player": {
+        "x": 0,
+        "z": 6.25,
+        "angle": 3.141592653589793,
+        "hp": 100,
+        "invulnerable": 0,
+        "moving": 1
+      },
+      "screen": {
+        "x": 195,
+        "y": 527.4614354498333
+      },
+      "camera": {
+        "x": 0,
+        "y": 47.866486153846154,
+        "z": 33.66588923076923,
+        "elevation": 55
+      }
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "key": "ArrowRight",
+      "player": {
+        "x": 7.954431559472083,
+        "z": 2.00851772773072,
+        "angle": -2.273903949876213,
+        "hp": 100,
+        "invulnerable": 0,
+        "moving": 1
+      },
+      "screen": {
+        "x": 704.2883679121144,
+        "y": 573.3007430887061
+      },
+      "camera": {
+        "x": 0,
+        "y": 29.491200000000003,
+        "z": 20.799599999999998,
+        "elevation": 55
+      }
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "key": "ArrowLeft",
+      "player": {
+        "x": -7.954431559472083,
+        "z": 2.00851772773072,
+        "angle": 2.273903949876213,
+        "hp": 100,
+        "invulnerable": 0,
+        "moving": 1
+      },
+      "screen": {
+        "x": 63.71163208788572,
+        "y": 573.3007430887061
+      },
+      "camera": {
+        "x": 0,
+        "y": 29.491200000000003,
+        "z": 20.799599999999998,
+        "elevation": 55
+      }
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "key": "ArrowUp",
+      "player": {
+        "x": 0,
+        "z": -6.25,
+        "angle": 0,
+        "hp": 100,
+        "invulnerable": 0,
+        "moving": 1
+      },
+      "screen": {
+        "x": 384,
+        "y": 326.108809462517
+      },
+      "camera": {
+        "x": 0,
+        "y": 29.491200000000003,
+        "z": 20.799599999999998,
+        "elevation": 55
+      }
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "key": "ArrowDown",
+      "player": {
+        "x": 0,
+        "z": 6.25,
+        "angle": 3.141592653589793,
+        "hp": 100,
+        "invulnerable": 0,
+        "moving": 1
+      },
+      "screen": {
+        "x": 384,
+        "y": 728.2598101539494
+      },
+      "camera": {
+        "x": 0,
+        "y": 29.491200000000003,
+        "z": 20.799599999999998,
+        "elevation": 55
+      }
+    }
+  ],
+  "errors": []
+}

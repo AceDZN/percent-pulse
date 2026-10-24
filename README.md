@@ -1,63 +1,57 @@
 # Percent Pulse · דופק האחוז
 
-A playable Hebrew 3D arena shooter built with TypeScript, Three.js and Vite. Move, aim, dash and spend finite flat-damage or current-HP percentage attacks. Five encounters share an active arena: clear the threats **and survive the containment cycle**. The complete clean run is about 5½ minutes including interludes. No answer field or quiz gate.
+A Hebrew 3D arcade arena game. **Move; the blaster aims and fires automatically. Space releases a percentage Pulse that pushes nearby enemies away.** Clear eight short waves, with immediate celebration and current-wave retries.
 
-## Run locally
+This v2 rebuild responds to the owner's feedback about confusing controls and boring flow. The [plan](docs/rebuild-v2/PLAN.md) and [three generated mockups](docs/rebuild-v2/mockups/PROMPTS.md) were committed before source changes. The original manual-aim, finite-ammo and fixed-survival design has been replaced.
 
-Node.js 22+ recommended. All runtime models, textures and fonts are local; no backend, account, API key or network service is required to play.
+## Play locally
+
+All runtime models, textures and fonts are bundled. No backend, login, API key or remote service is needed.
 
 ```sh
 npm ci
 npm run dev       # http://localhost:5182 — strict port
-npm test          # exact math and pure state tests
+npm test
 npm run build     # TypeScript check + static dist/
 npm run preview   # http://localhost:4182 — strict port
 ```
 
-Do not stop another process if a port is occupied. The verified production preview is served on4182. `dist/` is generated and ignored.
-
-## Controls
+Do not stop another process if a port is occupied. The local production preview uses 4182.
 
 | Action | Desktop | Touch/tablet |
 | --- | --- | --- |
-| Move | WASD or arrows | Left virtual stick |
-| Aim | Mouse | Drag on arena |
-| Bolt:18HP | Left click (hold), J or HUD control | ◆ button |
-| Pulse:25% currentHP | Right click (hold), Q or HUD control | ◎ button |
-| Dash / brief invulnerability | Space | Dash button |
-| Arm next-hit +50% boost in encounter4 | E or boost control | Boost control |
-| Pause / retry / optional explanation | Escape / pause button | Pause button |
-| Fullscreen | F; Escape exits | Browser fullscreen when available |
+| Move | WASD/arrows, or click/hold on the floor | Left stick, or touch the floor |
+| Pulse | Space or the large Pulse button | Large Pulse button |
+| Pause | Escape / pause button | Pause button |
+| Fullscreen | F; Escape exits | Browser support permitting |
 
-Settings provide keyboard remapping, volume/mute, reduced effects, preview toggle and visible touch controls. Blur/visibility handlers and a frame watchdog pause combat and clear held input; native tab switching under debugger instrumentation remains unverified (see PLAYTEST.md). Opening settings freezes the simulation, including interludes.
+Settings include remapping, volume/mute, reduced effects and visible touch controls. Opening settings pauses play. The first wave teaches movement; the next safely introduces Pulse.
 
-## Implemented rules
+## Rules
 
-- Bolt removes18HP. Pulse removes exactly one quarter of HP **at confirmed impact**. BigInt rational state is never rounded between hits.
-- The optional one-hit boost multiplies raw damage by1.5: Bolt27, Pulse37.5% of captured currentHP. It expires only on a confirmed impact.
-- Applied damage is capped at the remainingHP. Misses/dead rays spend cooldown, but consume neither ammunition nor boost.
-- Percent-only strikes below100% cannot finish positive exactHP. Spending all Bolts while enemies survive produces an explicit recoverable failure.
-- Pausing, immediate retry, truthful attempt-scoped hit replay, local anonymous action log, changed final values and an initially unhinted transfer encounter are implemented.
-- Deterministic `window.advanceTime(ms)` advances all simulation in fixed1/60s steps and respects pause/settings. `window.render_game_to_text()` reports coordinates, exact HP, screen aim positions, hazards, resources and recent action effects.
+- Ordinary shots deal exactly 18HP, target automatically across the compact arena, and never run out.
+- Pulse removes exactly one quarter of each nearby enemy's **current HP at impact**, interrupts its warning and shoves it away. Two charges refill each wave from wave two. No nearby enemy means no charge spent.
+- BigInt rational state is never rounded between hits. `96 → 72 → 54` remains exact. Auto-fire can change the base before a later Pulse; the actual receipt names that base.
+- All damage has a prior floor warning. Contact alone does not hurt. One hit removes one of five shields, with brief invulnerability afterward. Clearing a wave heals one shield.
+- The last assigned kill ends a wave immediately. Clear screens wait safely for Next. Failure retries only the current wave with health and charges restored.
 
-## Art and evidence
+The helper API retains tested boost/percentage math examples, but no boost is part of the v2 player controls. The percentage effect supports a positioning/rescue action; learning gains or strategic depth are not claimed.
 
-The [generated design target](docs/visual-targets/gameplay-v1.png) is an imagegen mockup, **not a gameplay capture**. Its prompts and provenance are alongside it. The actual 3D scene is interactive geometry with a locally bundled, Chrome-Tripo-generated sentinel. [ASSETS.md](ASSETS.md) records task,45-credit displayed cost, exact prompt, normal GLB export, hashes, optimization and service license evidence. Heebo is bundled under its [OFL](docs/licenses/Heebo-OFL.txt).
+## Art and verification
 
-[CURRICULUM.md](CURRICULUM.md) maps game actions to the supplied Workbook snapshots. Workbook has not validated this fictional game. [PLAYTEST.md](PLAYTEST.md) and [visual review](docs/VISUAL_REVIEW.md) distinguish tested behavior, actual screenshots and remaining deviations. Automation does not establish student learning or enjoyment.
+[ASSETS.md](ASSETS.md) records the original Chrome-Tripo task, displayed 45-credit cost, normal GLB export, exact prompt, hashes and licensing evidence. This rebuild reuses that visible model without new generation spend. The cyan hero, skitters, arena and mathematical warning/range shapes are procedural. Heebo is locally bundled under its OFL.
 
-Supplementary adaptive Chrome production run (real keyboard/mouse input; no injected wins):
+[PLAYTEST.md](PLAYTEST.md) records current measured results and limitations. [Visual review](docs/rebuild-v2/VISUAL_REVIEW.md) compares actual captures with the generated mockups. [CURRICULUM.md](CURRICULUM.md) maps the percentage rules to reviewed Workbook source snapshots; Workbook has not validated the game.
 
 ```sh
-node tests/browser-playthrough.mjs
+node tests/rebuild-playthrough.mjs  # all eight waves, real movement + Space
+node tests/rebuild-browser-qa.mjs   # controls, recovery, settings, actual touch
 ```
 
-The installed develop-web-game action client is also used; commands and observations are in PLAYTEST.md. Test output is ignored, representative actual evidence lives in `docs/evidence/`.
+These scripts observe `window.render_game_to_text()` and advance the documented fixed-step clock with `window.advanceTime(ms)`. They do not inject HP, resources, formations or wins. Representative real screenshots live in `docs/rebuild-v2/actual/`. Older `browser-playthrough.mjs`, `browser-ui-qa.mjs`, `docs/evidence/` and v1 review documents are historical, not current test instructions.
 
-## Later Vercel deployment
+## Deployment later
 
-The build is a static Vite site with relative asset paths. Import this existing public repository, choose Vite, use `npm run build` and output`dist`. `vercel.json` records those settings. No environment variables are required. This kickoff does not deploy or select a Vercel destination.
+This is a static Vite build with relative asset paths and `vercel.json`: build command `npm run build`, output `dist`. No environment variables are required. No Vercel deployment has been made.
 
-## Scope and limitations
-
-This slice ships two enemy families, one boost, one arena and five finite encounters. The generated sentinel is an optimized static combined mesh animated as a whole, without a rig. The hero, skitter, exact telegraphs and arena are procedural. The scene follows the target's palette, camera, silhouette and HUD direction; it is not a pixel-identical reproduction of the dense illustration. Difficulty/long survival intervals still need human playtesting. Steam novelty/research gates remain unassessed; no formal acceptance or learning gains are claimed.
+The current slice has one arena, two enemy families, eight finite formations and a static generated anchor mesh animated as a whole. Automated checks establish behavior, not enjoyment. Human feedback on the simpler flow and real-device touch remains the next design input.

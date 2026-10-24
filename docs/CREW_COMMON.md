@@ -1,5 +1,7 @@
 # Five distinct math games — builder crew agreement
 
+> **Current Percent Pulse authority:** The owner requested a full replan after playing v1. [The v2 plan](rebuild-v2/PLAN.md) supersedes Percent Pulse’s original manual aiming, finite ammunition, dash/boost, fixed survival timers and five-encounter duration target. The real 3D, exact math, existing Chrome-Tripo asset, separate public repository and crew/evidence requirements remain. The original brief below is retained as history.
+
 24 October 2026. This is the newly authorized portfolio: Scale Shift, Percent Pulse, Hypotenuse Rush, Ringwarden, Equal & Opposite. Read your game-specific BUILD_HANDOFF.md before building.
 
 ## Latest human authorization — give this verbatim to every crew member

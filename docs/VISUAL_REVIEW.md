@@ -1,3 +1,5 @@
+> **Historical v1 evidence.** Current rebuild results are in [PLAYTEST.md](../PLAYTEST.md), [REBUILD_QA.md](REBUILD_QA.md) and [v2 visual review](rebuild-v2/VISUAL_REVIEW.md).
+
 # Generated target versus playable build
 
 Independent review, 24 October 2026. The image in `visual-targets/` is a **generated design target**. Images in `evidence/` are actual browser captures of the implemented Three.js game. The generated bitmap is not used as the playable scene.

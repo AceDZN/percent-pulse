@@ -1,0 +1,158 @@
+{
+  "version": 2,
+  "coordinates": "x right, z toward camera; floor y0; player ellipse (x/8.4)^2+(z/6.25)^2<=1; hazards lane heading atan2(dx,dz), radius half-length, width full",
+  "mode": "playing",
+  "wave": 1,
+  "name": "פשוט לזוז",
+  "phase": "combat",
+  "time": 0.93,
+  "waveTime": 0.73,
+  "player": {
+    "x": -3.1678383797157323,
+    "z": 3.3,
+    "angle": -2.356194490192345,
+    "hp": 100,
+    "invulnerable": 0.4666666666666665,
+    "moving": 1
+  },
+  "movement": {
+    "x": -1,
+    "z": -1
+  },
+  "destination": null,
+  "target": null,
+  "autoFire": {
+    "damage": 18,
+    "unlimited": true,
+    "cooldown": 0.4633333333333331,
+    "range": 18
+  },
+  "pulse": {
+    "charges": 0,
+    "cooldown": 0,
+    "radius": 5.4,
+    "preview": []
+  },
+  "enemies": [],
+  "pending": [
+    {
+      "hp": 36,
+      "at": 1,
+      "x": 4,
+      "z": -3,
+      "family": "skitter",
+      "in": 0.27
+    },
+    {
+      "hp": 18,
+      "at": 1.3,
+      "x": 0,
+      "z": -4.8,
+      "family": "skitter",
+      "in": 0.57
+    }
+  ],
+  "hazards": [],
+  "receipts": [
+    {
+      "time": 0.817,
+      "target": 1,
+      "kind": "bolt",
+      "before": "18",
+      "raw": "18",
+      "applied": "18",
+      "after": "0",
+      "boosted": false
+    }
+  ],
+  "waveKills": 1,
+  "waveTotal": 3,
+  "kills": 1,
+  "retries": 0,
+  "pulses": 0,
+  "hintUses": 0,
+  "reason": "",
+  "rendering": {
+    "calls": 107,
+    "triangles": 6168,
+    "width": 1672,
+    "height": 941,
+    "dpr": 1,
+    "modelStatus": "Tripo pulse-sentinel.glb loaded",
+    "camera": {
+      "x": 0,
+      "y": 16.384,
+      "z": 11.622,
+      "elevation": 55
+    }
+  },
+  "assets": "Tripo pulse-sentinel.glb loaded",
+  "screen": {
+    "player": {
+      "x": 610.9281643164209,
+      "y": 653.8309144816402
+    },
+    "enemies": []
+  },
+  "settings": {
+    "volume": 0.18,
+    "reduced": false,
+    "bindings": {
+      "up": "KeyW",
+      "down": "KeyS",
+      "left": "KeyA",
+      "right": "KeyD",
+      "pulse": "Space"
+    }
+  },
+  "localEvents": [
+    {
+      "t": 0,
+      "event": "wave-start",
+      "data": {
+        "version": 2,
+        "wave": 1,
+        "hp": 100,
+        "charges": 0,
+        "guided": true
+      }
+    },
+    {
+      "t": 0.217,
+      "event": "movement-learned",
+      "data": {}
+    },
+    {
+      "t": 0.817,
+      "event": "spawn",
+      "data": {
+        "id": 1,
+        "hp": 18,
+        "family": "skitter",
+        "boss": false
+      }
+    },
+    {
+      "t": 0.817,
+      "event": "hit",
+      "data": {
+        "time": 0.817,
+        "target": 1,
+        "kind": "bolt",
+        "before": "18",
+        "raw": "18",
+        "applied": "18",
+        "after": "0",
+        "boosted": false
+      }
+    },
+    {
+      "t": 0.817,
+      "event": "destroyed",
+      "data": {
+        "target": 1,
+        "wave": 1
+      }
+    }
+  ]
+}

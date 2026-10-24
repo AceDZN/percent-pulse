@@ -1,0 +1,76 @@
+{
+  "browser": "155.0.8059.85",
+  "viewport": "1672x941 DPR1",
+  "retries": 0,
+  "errors": [],
+  "badResponses": [],
+  "external": [],
+  "method": "Real keyboard arrows and Space; read-only text state and public fixed-step time hook; no injected HP, resources, enemies or win. Active game clock includes guided introductions but excludes clear pauses.",
+  "final": {
+    "mode": "won",
+    "wave": 8,
+    "time": 114.85,
+    "waveTime": 26.02,
+    "kills": 48,
+    "pulses": 11,
+    "retries": 0,
+    "player": {
+      "x": -2.7932289365604728,
+      "z": 3.6979225569471224,
+      "angle": 1.6649190721909746,
+      "hp": 100,
+      "invulnerable": 0,
+      "moving": 1
+    }
+  },
+  "waves": [
+    {
+      "cleared": 1,
+      "seconds": 2.37,
+      "hp": 100,
+      "kills": 3
+    },
+    {
+      "cleared": 2,
+      "seconds": 4.25,
+      "hp": 100,
+      "kills": 4
+    },
+    {
+      "cleared": 3,
+      "seconds": 7.98,
+      "hp": 100,
+      "kills": 6
+    },
+    {
+      "cleared": 4,
+      "seconds": 14.02,
+      "hp": 100,
+      "kills": 7
+    },
+    {
+      "cleared": 5,
+      "seconds": 14.55,
+      "hp": 100,
+      "kills": 6
+    },
+    {
+      "cleared": 6,
+      "seconds": 19,
+      "hp": 100,
+      "kills": 9
+    },
+    {
+      "cleared": 7,
+      "seconds": 23.47,
+      "hp": 100,
+      "kills": 6
+    },
+    {
+      "cleared": 8,
+      "seconds": 26.02,
+      "hp": 100,
+      "kills": 7
+    }
+  ]
+}

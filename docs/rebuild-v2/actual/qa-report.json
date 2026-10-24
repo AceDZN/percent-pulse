@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-24",
+  "url": "http://localhost:4182/",
+  "browser": "155.0.8059.85",
+  "method": "Actual keyboard, mouse, and CDP touch input plus documented fixed-step advanceTime; no state/resource/win injection. Synthetic blur explicitly tested; native focus not established.",
+  "checks": 13,
+  "results": [
+    {
+      "name": "safe movement-only opening and corrupt-setting fallback",
+      "passed": true
+    },
+    {
+      "name": "ordinary attack occurs after movement with no aim/fire input",
+      "passed": true
+    },
+    {
+      "name": "enemy clearance ends wave immediately and clear state stays safe",
+      "passed": true,
+      "firstWaveSeconds": 2.37
+    },
+    {
+      "name": "held Next does not spend Pulse; safe four-target introduction remains unchanged",
+      "passed": true
+    },
+    {
+      "name": "single Space spends one area charge; 96→72 and 24→18 are readable; hold does not repeat",
+      "passed": true
+    },
+    {
+      "name": "floor click moves; mute/reduced/remapped Pulse work; latest current base replaces old receipt",
+      "passed": true
+    },
+    {
+      "name": "ordinary fire finishes with no charges and a held special key cannot skip a clear",
+      "passed": true
+    },
+    {
+      "name": "keyboard movement overrides floor destination without an aiming mode",
+      "passed": true
+    },
+    {
+      "name": "pause, tablet/portrait resize and fullscreen preserve progress",
+      "passed": true
+    },
+    {
+      "name": "explicit blur handler clears held input and resumes safely",
+      "passed": true,
+      "method": "synthetic blur event; native focus not claimed"
+    },
+    {
+      "name": "actual no-input failure retries the current wave with restored health/charges",
+      "passed": true,
+      "failedWave": 5,
+      "idleClears": [
+        3,
+        4
+      ]
+    },
+    {
+      "name": "actual touch stick and single Pulse button complete the opening and show area damage on tablet/portrait",
+      "passed": true
+    },
+    {
+      "name": "no page/console errors, failed resource responses or external runtime requests",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "badResponses": [],
+  "external": [],
+  "retryObserved": {
+    "mode": "playing",
+    "wave": 5,
+    "player": {
+      "x": 0,
+      "z": 3.3,
+      "angle": 3.141592653589793,
+      "hp": 100,
+      "invulnerable": 1.4,
+      "moving": 0
+    },
+    "pulse": {
+      "charges": 2,
+      "cooldown": 0,
+      "radius": 5.4,
+      "preview": []
+    },
+    "receipts": [],
+    "retries": 1
+  },
+  "modelStatus": "Tripo pulse-sentinel.glb loaded",
+  "screenshots": {
+    "qa-desktop-pulse": "qa-desktop-pulse.png",
+    "qa-retry-prompt": "qa-retry-prompt.png",
+    "qa-tablet-pulse": "qa-tablet-pulse.png",
+    "qa-portrait-pulse": "qa-portrait-pulse.png"
+  },
+  "limits": [
+    "Automation establishes action/consequence, not human enjoyment or learning.",
+    "Portrait preserves whole arena and large controls; actor and HP-label size are reduced.",
+    "Full successful campaign is independently owned by lead replay."
+  ],
+  "screenshotNote": "Desktop/tablet/portrait Pulse PNGs are refreshed by the final four-check UI follow-up; see qa-ui-followup-report.json. The failure/retry prompt remains from the original independent 13-check action pass."
+}

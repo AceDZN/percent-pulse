@@ -1,3 +1,5 @@
+> **Historical v1 evidence.** Current rebuild results are in [PLAYTEST.md](../PLAYTEST.md), [REBUILD_QA.md](REBUILD_QA.md) and [v2 visual review](rebuild-v2/VISUAL_REVIEW.md).
+
 # Independent math and playability QA
 
 **Final status:** **27/27 math/state tests** and **11/11 independent production UI checks passed**. The final portrait rendering recheck also passed after the fixes below. Native focus loss under browser automation remains unverified; it is not reported as a pass.

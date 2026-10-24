@@ -1,0 +1,209 @@
+{
+  "version": 2,
+  "coordinates": "x right, z toward camera; floor y0; player ellipse (x/8.4)^2+(z/6.25)^2<=1; hazards lane heading atan2(dx,dz), radius half-length, width full",
+  "mode": "clear",
+  "wave": 1,
+  "name": "פשוט לזוז",
+  "phase": "combat",
+  "time": 2.57,
+  "waveTime": 2.37,
+  "player": {
+    "x": -4.883750835395087,
+    "z": 0.00016835446277863042,
+    "angle": 2.317653017341816,
+    "hp": 100,
+    "invulnerable": 0,
+    "moving": 1
+  },
+  "movement": {
+    "x": 0,
+    "z": 0
+  },
+  "destination": null,
+  "target": null,
+  "autoFire": {
+    "damage": 18,
+    "unlimited": true,
+    "cooldown": 0.58,
+    "range": 18
+  },
+  "pulse": {
+    "charges": 0,
+    "cooldown": 0,
+    "radius": 5.4,
+    "preview": []
+  },
+  "enemies": [],
+  "pending": [],
+  "hazards": [],
+  "receipts": [
+    {
+      "time": 0.817,
+      "target": 1,
+      "kind": "bolt",
+      "before": "18",
+      "raw": "18",
+      "applied": "18",
+      "after": "0",
+      "boosted": false
+    },
+    {
+      "time": 1.4,
+      "target": 2,
+      "kind": "bolt",
+      "before": "36",
+      "raw": "18",
+      "applied": "18",
+      "after": "18",
+      "boosted": false
+    },
+    {
+      "time": 1.983,
+      "target": 2,
+      "kind": "bolt",
+      "before": "18",
+      "raw": "18",
+      "applied": "18",
+      "after": "0",
+      "boosted": false
+    },
+    {
+      "time": 2.567,
+      "target": 3,
+      "kind": "bolt",
+      "before": "18",
+      "raw": "18",
+      "applied": "18",
+      "after": "0",
+      "boosted": false
+    }
+  ],
+  "waveKills": 3,
+  "waveTotal": 3,
+  "kills": 3,
+  "retries": 0,
+  "pulses": 0,
+  "hintUses": 0,
+  "reason": "",
+  "rendering": {
+    "calls": 84,
+    "triangles": 4456,
+    "width": 1672,
+    "height": 941,
+    "dpr": 1,
+    "modelStatus": "Tripo pulse-sentinel.glb loaded",
+    "camera": {
+      "x": 0,
+      "y": 16.384,
+      "z": 11.622,
+      "elevation": 55
+    }
+  },
+  "assets": "Tripo pulse-sentinel.glb loaded",
+  "screen": {
+    "player": {
+      "x": 521.7087505381361,
+      "y": 462.60141394230544
+    },
+    "enemies": []
+  },
+  "settings": {
+    "volume": 0.18,
+    "reduced": false,
+    "bindings": {
+      "up": "KeyW",
+      "down": "KeyS",
+      "left": "KeyA",
+      "right": "KeyD",
+      "pulse": "Space"
+    }
+  },
+  "localEvents": [
+    {
+      "t": 1.2,
+      "event": "spawn",
+      "data": {
+        "id": 2,
+        "hp": 36,
+        "family": "skitter",
+        "boss": false
+      }
+    },
+    {
+      "t": 1.4,
+      "event": "hit",
+      "data": {
+        "time": 1.4,
+        "target": 2,
+        "kind": "bolt",
+        "before": "36",
+        "raw": "18",
+        "applied": "18",
+        "after": "18",
+        "boosted": false
+      }
+    },
+    {
+      "t": 1.5,
+      "event": "spawn",
+      "data": {
+        "id": 3,
+        "hp": 18,
+        "family": "skitter",
+        "boss": false
+      }
+    },
+    {
+      "t": 1.983,
+      "event": "hit",
+      "data": {
+        "time": 1.983,
+        "target": 2,
+        "kind": "bolt",
+        "before": "18",
+        "raw": "18",
+        "applied": "18",
+        "after": "0",
+        "boosted": false
+      }
+    },
+    {
+      "t": 1.983,
+      "event": "destroyed",
+      "data": {
+        "target": 2,
+        "wave": 1
+      }
+    },
+    {
+      "t": 2.567,
+      "event": "hit",
+      "data": {
+        "time": 2.567,
+        "target": 3,
+        "kind": "bolt",
+        "before": "18",
+        "raw": "18",
+        "applied": "18",
+        "after": "0",
+        "boosted": false
+      }
+    },
+    {
+      "t": 2.567,
+      "event": "destroyed",
+      "data": {
+        "target": 3,
+        "wave": 1
+      }
+    },
+    {
+      "t": 2.567,
+      "event": "wave-cleared",
+      "data": {
+        "wave": 1,
+        "seconds": 2.366666666666663
+      }
+    }
+  ]
+}

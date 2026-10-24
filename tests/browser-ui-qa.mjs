@@ -1,3 +1,4 @@
+// Historical v1 harness. For the current game use rebuild-playthrough.mjs and rebuild-browser-qa.mjs.
 // Independent production UI checks use real controls except the explicitly
 // qualified blur-event fallback. No HP, resources, encounters, or wins are set;
 // the only game API invocation is the documented deterministic time hook.

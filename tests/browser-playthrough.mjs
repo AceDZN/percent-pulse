@@ -1,3 +1,4 @@
+// Historical v1 harness. For the current game use rebuild-playthrough.mjs and rebuild-browser-qa.mjs.
 /** Supplement to the installed web-game action client: adaptive aim/weapon inputs,
  * all encounters, complete HUD screenshots, and production Chrome measurement.
  * Reads the public text hook; changes state ONLY with real keyboard/mouse input

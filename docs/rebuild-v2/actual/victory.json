@@ -1,0 +1,221 @@
+{
+  "version": 2,
+  "coordinates": "x right, z toward camera; floor y0; player ellipse (x/8.4)^2+(z/6.25)^2<=1; hazards lane heading atan2(dx,dz), radius half-length, width full",
+  "mode": "won",
+  "wave": 8,
+  "name": "הלב האחרון",
+  "phase": "combat",
+  "time": 114.85,
+  "waveTime": 26.02,
+  "player": {
+    "x": -2.7932289365604728,
+    "z": 3.6979225569471224,
+    "angle": 1.6649190721909746,
+    "hp": 100,
+    "invulnerable": 0,
+    "moving": 1
+  },
+  "movement": {
+    "x": 0,
+    "z": 0
+  },
+  "destination": null,
+  "target": null,
+  "autoFire": {
+    "damage": 18,
+    "unlimited": true,
+    "cooldown": 0.58,
+    "range": 18
+  },
+  "pulse": {
+    "charges": 0,
+    "cooldown": 0,
+    "radius": 5.4,
+    "preview": []
+  },
+  "enemies": [],
+  "pending": [],
+  "hazards": [],
+  "receipts": [
+    {
+      "time": 112.517,
+      "target": 45,
+      "kind": "bolt",
+      "before": "36",
+      "raw": "18",
+      "applied": "18",
+      "after": "18",
+      "boosted": false
+    },
+    {
+      "time": 113.1,
+      "target": 45,
+      "kind": "bolt",
+      "before": "18",
+      "raw": "18",
+      "applied": "18",
+      "after": "0",
+      "boosted": false
+    },
+    {
+      "time": 113.683,
+      "target": 48,
+      "kind": "bolt",
+      "before": "54",
+      "raw": "18",
+      "applied": "18",
+      "after": "36",
+      "boosted": false
+    },
+    {
+      "time": 114.267,
+      "target": 48,
+      "kind": "bolt",
+      "before": "36",
+      "raw": "18",
+      "applied": "18",
+      "after": "18",
+      "boosted": false
+    },
+    {
+      "time": 114.85,
+      "target": 48,
+      "kind": "bolt",
+      "before": "18",
+      "raw": "18",
+      "applied": "18",
+      "after": "0",
+      "boosted": false
+    }
+  ],
+  "waveKills": 7,
+  "waveTotal": 7,
+  "kills": 48,
+  "retries": 0,
+  "pulses": 11,
+  "hintUses": 0,
+  "reason": "",
+  "rendering": {
+    "calls": 107,
+    "triangles": 4944,
+    "width": 1672,
+    "height": 941,
+    "dpr": 1,
+    "modelStatus": "Tripo pulse-sentinel.glb loaded",
+    "camera": {
+      "x": 0,
+      "y": 16.384,
+      "z": 11.622,
+      "elevation": 55
+    }
+  },
+  "assets": "Tripo pulse-sentinel.glb loaded",
+  "screen": {
+    "player": {
+      "x": 635.0226651329208,
+      "y": 679.6133194435463
+    },
+    "enemies": []
+  },
+  "settings": {
+    "volume": 0.18,
+    "reduced": false,
+    "bindings": {
+      "up": "KeyW",
+      "down": "KeyS",
+      "left": "KeyA",
+      "right": "KeyD",
+      "pulse": "Space"
+    }
+  },
+  "localEvents": [
+    {
+      "t": 113.1,
+      "event": "hit",
+      "data": {
+        "time": 113.1,
+        "target": 45,
+        "kind": "bolt",
+        "before": "18",
+        "raw": "18",
+        "applied": "18",
+        "after": "0",
+        "boosted": false
+      }
+    },
+    {
+      "t": 113.1,
+      "event": "destroyed",
+      "data": {
+        "target": 45,
+        "wave": 8
+      }
+    },
+    {
+      "t": 113.683,
+      "event": "hit",
+      "data": {
+        "time": 113.683,
+        "target": 48,
+        "kind": "bolt",
+        "before": "54",
+        "raw": "18",
+        "applied": "18",
+        "after": "36",
+        "boosted": false
+      }
+    },
+    {
+      "t": 114.267,
+      "event": "hit",
+      "data": {
+        "time": 114.267,
+        "target": 48,
+        "kind": "bolt",
+        "before": "36",
+        "raw": "18",
+        "applied": "18",
+        "after": "18",
+        "boosted": false
+      }
+    },
+    {
+      "t": 114.85,
+      "event": "hit",
+      "data": {
+        "time": 114.85,
+        "target": 48,
+        "kind": "bolt",
+        "before": "18",
+        "raw": "18",
+        "applied": "18",
+        "after": "0",
+        "boosted": false
+      }
+    },
+    {
+      "t": 114.85,
+      "event": "destroyed",
+      "data": {
+        "target": 48,
+        "wave": 8
+      }
+    },
+    {
+      "t": 114.85,
+      "event": "wave-cleared",
+      "data": {
+        "wave": 8,
+        "seconds": 26.01666666666647
+      }
+    },
+    {
+      "t": 114.85,
+      "event": "won",
+      "data": {
+        "seconds": 114.84999999999476,
+        "retries": 0
+      }
+    }
+  ]
+}

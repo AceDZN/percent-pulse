@@ -1,5 +1,7 @@
 # Percent Pulse — build handoff
 
+> **Current Percent Pulse authority:** The owner requested a full replan after playing v1. [The v2 plan](rebuild-v2/PLAN.md) supersedes Percent Pulse’s original manual aiming, finite ammunition, dash/boost, fixed survival timers and five-encounter duration target. The real 3D, exact math, existing Chrome-Tripo asset, separate public repository and crew/evidence requirements remain. The original brief below is retained as history.
+
 Approved replacement, 24 October 2026. Read [CREW_COMMON.md](CREW_COMMON.md), including the user's exact instruction and three-role crew: gameplay/rules lead, dedicated art/Tripo contributor, independent QA/learning reviewer. Assign separate file ownership and integrate their work. This is a new arena shooter; canceled prototypes remain stopped.
 
 ## Repository and delivery

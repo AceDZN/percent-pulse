@@ -1,0 +1,341 @@
+{
+  "version": 2,
+  "coordinates": "x right, z toward camera; floor y0; player ellipse (x/8.4)^2+(z/6.25)^2<=1; hazards lane heading atan2(dx,dz), radius half-length, width full",
+  "mode": "playing",
+  "wave": 5,
+  "name": "שני עוגנים",
+  "phase": "combat",
+  "time": 35.22,
+  "waveTime": 3.4,
+  "player": {
+    "x": -0.4357777721091333,
+    "z": -3.6238181771801976,
+    "angle": -1.7966630662488383,
+    "hp": 100,
+    "invulnerable": 0,
+    "moving": 1
+  },
+  "movement": {
+    "x": 1,
+    "z": 0
+  },
+  "destination": null,
+  "target": 21,
+  "autoFire": {
+    "damage": 18,
+    "unlimited": true,
+    "cooldown": 0.6499999999999997,
+    "range": 18
+  },
+  "pulse": {
+    "charges": 0,
+    "cooldown": 0.7999999999999997,
+    "radius": 5.4,
+    "preview": [
+      {
+        "target": 21,
+        "before": "135/4",
+        "raw": "135/16"
+      }
+    ]
+  },
+  "enemies": [
+    {
+      "id": 21,
+      "x": -5.103373583405695,
+      "z": -4.696374255630125,
+      "angle": 1.3119980054632692,
+      "hp": 33.75,
+      "maxHp": 144,
+      "family": "anchor",
+      "phase": "stunned",
+      "telegraph": 0,
+      "hitFlash": 0.12000000000000002,
+      "stun": 0.6999999999999997,
+      "boss": false,
+      "attackCooldown": 1.6,
+      "windup": 0,
+      "attackX": 0,
+      "attackZ": 0,
+      "rush": 0,
+      "rushX": 0,
+      "rushZ": 0,
+      "hpExact": "135/4"
+    },
+    {
+      "id": 22,
+      "x": 5.345230006986664,
+      "z": -2.750466730929311,
+      "angle": -1.7076659024429681,
+      "hp": 135,
+      "maxHp": 180,
+      "family": "anchor",
+      "phase": "stunned",
+      "telegraph": 0,
+      "hitFlash": 0.12000000000000002,
+      "stun": 0.6999999999999997,
+      "boss": false,
+      "attackCooldown": 1.6,
+      "windup": 0,
+      "attackX": 0,
+      "attackZ": 0,
+      "rush": 0,
+      "rushX": 0,
+      "rushZ": 0,
+      "hpExact": "135"
+    },
+    {
+      "id": 23,
+      "x": -5.614310743510109,
+      "z": 0.6017099477546454,
+      "angle": 2.255199566526209,
+      "hp": 36,
+      "maxHp": 36,
+      "family": "skitter",
+      "phase": "pursue",
+      "telegraph": 0,
+      "hitFlash": 0,
+      "stun": 0,
+      "boss": false,
+      "attackCooldown": 1.0000000000000013,
+      "windup": 0,
+      "attackX": 0,
+      "attackZ": 0,
+      "rush": 0,
+      "rushX": 0,
+      "rushZ": 0,
+      "hpExact": "36"
+    }
+  ],
+  "pending": [
+    {
+      "hp": 36,
+      "at": 5,
+      "x": 6,
+      "z": 1,
+      "family": "skitter",
+      "in": 1.6
+    },
+    {
+      "hp": 54,
+      "at": 7,
+      "x": 0,
+      "z": -5,
+      "family": "skitter",
+      "in": 3.6
+    },
+    {
+      "hp": 36,
+      "at": 9,
+      "x": -5,
+      "z": 3,
+      "family": "skitter",
+      "in": 5.6
+    }
+  ],
+  "hazards": [],
+  "receipts": [
+    {
+      "time": 33.217,
+      "target": 21,
+      "kind": "pulse",
+      "before": "108",
+      "raw": "27",
+      "applied": "27",
+      "after": "81",
+      "boosted": false
+    },
+    {
+      "time": 33.967,
+      "target": 21,
+      "kind": "bolt",
+      "before": "81",
+      "raw": "18",
+      "applied": "18",
+      "after": "63",
+      "boosted": false
+    },
+    {
+      "time": 34.55,
+      "target": 21,
+      "kind": "bolt",
+      "before": "63",
+      "raw": "18",
+      "applied": "18",
+      "after": "45",
+      "boosted": false
+    },
+    {
+      "time": 35.117,
+      "target": 21,
+      "kind": "pulse",
+      "before": "45",
+      "raw": "45/4",
+      "applied": "45/4",
+      "after": "135/4",
+      "boosted": false
+    },
+    {
+      "time": 35.117,
+      "target": 22,
+      "kind": "pulse",
+      "before": "180",
+      "raw": "45",
+      "applied": "45",
+      "after": "135",
+      "boosted": false
+    }
+  ],
+  "waveKills": 0,
+  "waveTotal": 6,
+  "kills": 20,
+  "retries": 0,
+  "pulses": 5,
+  "hintUses": 0,
+  "reason": "",
+  "rendering": {
+    "calls": 130,
+    "triangles": 78798,
+    "width": 1672,
+    "height": 941,
+    "dpr": 1,
+    "modelStatus": "Tripo pulse-sentinel.glb loaded",
+    "camera": {
+      "x": 0,
+      "y": 16.384,
+      "z": 11.622,
+      "elevation": 55
+    }
+  },
+  "assets": "Tripo pulse-sentinel.glb loaded",
+  "screen": {
+    "player": {
+      "x": 810.5856347173859,
+      "y": 290.21392674430217
+    },
+    "enemies": [
+      {
+        "id": 21,
+        "x": 546.4108073552285,
+        "y": 245.22709892266923
+      },
+      {
+        "id": 22,
+        "x": 1154.939245024236,
+        "y": 328.7325699617139
+      },
+      {
+        "id": 23,
+        "x": 468.3794806320994,
+        "y": 494.728691868025
+      }
+    ]
+  },
+  "settings": {
+    "volume": 0.18,
+    "reduced": false,
+    "bindings": {
+      "up": "KeyW",
+      "down": "KeyS",
+      "left": "KeyA",
+      "right": "KeyD",
+      "pulse": "Space"
+    }
+  },
+  "localEvents": [
+    {
+      "t": 33.217,
+      "event": "pulse",
+      "data": {
+        "count": 1,
+        "charges": 1,
+        "radius": 5.4
+      }
+    },
+    {
+      "t": 33.833,
+      "event": "spawn",
+      "data": {
+        "id": 22,
+        "hp": 180,
+        "family": "anchor",
+        "boss": false
+      }
+    },
+    {
+      "t": 33.967,
+      "event": "hit",
+      "data": {
+        "time": 33.967,
+        "target": 21,
+        "kind": "bolt",
+        "before": "81",
+        "raw": "18",
+        "applied": "18",
+        "after": "63",
+        "boosted": false
+      }
+    },
+    {
+      "t": 34.55,
+      "event": "hit",
+      "data": {
+        "time": 34.55,
+        "target": 21,
+        "kind": "bolt",
+        "before": "63",
+        "raw": "18",
+        "applied": "18",
+        "after": "45",
+        "boosted": false
+      }
+    },
+    {
+      "t": 34.833,
+      "event": "spawn",
+      "data": {
+        "id": 23,
+        "hp": 36,
+        "family": "skitter",
+        "boss": false
+      }
+    },
+    {
+      "t": 35.117,
+      "event": "hit",
+      "data": {
+        "time": 35.117,
+        "target": 21,
+        "kind": "pulse",
+        "before": "45",
+        "raw": "45/4",
+        "applied": "45/4",
+        "after": "135/4",
+        "boosted": false
+      }
+    },
+    {
+      "t": 35.117,
+      "event": "hit",
+      "data": {
+        "time": 35.117,
+        "target": 22,
+        "kind": "pulse",
+        "before": "180",
+        "raw": "45",
+        "applied": "45",
+        "after": "135",
+        "boosted": false
+      }
+    },
+    {
+      "t": 35.117,
+      "event": "pulse",
+      "data": {
+        "count": 2,
+        "charges": 0,
+        "radius": 5.4
+      }
+    }
+  ]
+}
