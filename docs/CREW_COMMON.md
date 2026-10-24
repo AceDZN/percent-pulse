@@ -23,6 +23,8 @@ Each new builder chat is the lead of one independent crew. The human explicitly 
 
 The lead integrates and owns completion. If using three helper agents, give the extra helper a bounded content or interaction task rather than duplicate ownership. Communicate with your own crew, not other user-owned chats. No automatic cross-chat messaging is needed. Do not add co-author or generated-by trailers.
 
+The lead is the Git/index owner. Helpers contribute to assigned files and report changes; the lead serializes commits/pushes on main so simultaneous agents do not race on the index. Give every helper the exact human instruction above and your game identity. At least the visual/Tripo and independent QA roles must receive actual delegated work; naming imaginary team members in a plan does not constitute a crew.
+
 | Game | Standalone repository directory | GitHub repository | Dev / preview ports |
 |---|---|---|---|
 | Scale Shift | /Users/acedzn/dev/AceDZN-exp/scale-shift | AceDZN/scale-shift | 5181 / 4181 |
