@@ -32,7 +32,7 @@ npx --yes @gltf-transform/cli simplify sentinel-welded.glb sentinel-simplified.g
 
 The simplifier stopped at 89,992 triangles because of UV boundaries. Blender then imported the simplified GLB, applied a Decimate modifier with ratio `0.4`, and exported an ordinary GLB with `export_apply=True`, `export_image_format="AUTO"`. Intermediate files were removed. No compression extension, decoder, skin, armature, or animation is required. The three normal/base-color/metallic-roughness textures remain local at 1K; the exported source had under 600 KB of compressed texture data.
 
-The scene pitches the originally vertical face skyward, normalizes the longest dimension to 2.25 world units, and places it above the procedural anchor ring. Anchor collider radius remains exactly 1.25 in gameplay state. The generated bounds never control damage, hit tests, telegraph widths, or targeting. Mesh loading reports its actual outcome in `render_game_to_text`; the generated model replaces the anchor placeholder when loaded.
+The scene pitches the originally vertical face skyward and places it above the procedural anchor ring. The v2 rebuild normalizes the longest dimension to 2.8 world units, with a separate final-boss visual scale. Generated bounds never control damage, hit tests, telegraph widths, or targeting. Mesh loading reports its actual outcome in `render_game_to_text`; the generated model replaces the anchor placeholder when loaded.
 
 License evidence: the Chrome account selector visibly showed **Pro** at generation/export time. The [official Tripo commercial-use guide](https://www.tripo3d.ai/help/privacy-policy/how-to-use-tripo-models-commercially) describes paid-user use, modification, and distribution rights; the [authoritative terms](https://www.tripo3d.ai/terms) govern the asset. The generation used the displayed **Sharing Only** setting. This repository does not claim the output is public domain or independently relicense third-party service terms. No other artist's character or reference artwork was supplied.
 
@@ -48,7 +48,7 @@ Visual thesis: charcoal stone and bold faceted neon armor in a floating ring amp
 
 Content plan: one full-canvas playable arena; HUD stays with the gameplay owner. The action plane is quiet and the arena trim provides orientation. Interaction motion: directional facing, bounded shallow camera follow, enemy hover and telegraph charging. Reduced effects removes hover and smooth camera motion.
 
-## Canonical gameplay target and implementation breakdown
+## V1 gameplay target and implementation breakdown (historical)
 
 The generated image at `docs/visual-targets/gameplay-v1.png` is a **design reference, not a build screenshot**. Its prompt and correction are saved beside it. It arrived after this one normal Tripo task was already submitted; no retroactive claim of image-first generation is made. The crew inspected the new reference, retained the compatible magenta sentinel, and rebuilt the scene to match its composition without submitting another paid generation.
 
@@ -66,3 +66,19 @@ The generated image at `docs/visual-targets/gameplay-v1.png` is a **design refer
 | Current/max HP | World-space anchor label such as `72 / 96`; full skitter label `18 HP`; bar ratio uses actual current/max state. |
 
 Known fidelity limits: the static generated anchor is a hovering armored sentinel rather than the target's rigged hulking humanoid. The procedural player and skitter have simplified silhouettes. Floor detail is geometric/procedural rather than a painted rock texture. These are visible implementation differences, not claims of a pixel-identical reconstruction.
+
+## V2 rebuild — mockups before source changes
+
+The owner rejected v1's controls, pacing, and readability and requested a full replan. The three new imagegen references in `docs/rebuild-v2/mockups/` — `opening.png`, `combat.png`, and `clear.png` — were generated, saved, and visually inspected **before the v2 scene rewrite**. Exact prompts and a manifest are adjacent; `docs/rebuild-v2/PLAN.md` defines the revised game flow. The lead recorded the mockup checkpoint as `b5e6471`. These images remain generated design references, not gameplay captures.
+
+The visual contributor inspected all three actual images, then rebuilt `src/scene.ts` around them:
+
+- Compact **9×7** ellipse floor and a stable **55°** perspective camera, with a starting desktop distance of **20** and **40°** vertical FOV. Aspect-aware framing and camera-relative fog preserve visibility on smaller screens.
+- Quiet irregular Voronoi stone slabs, cyan perimeter seam, low slate rim, four dim pink crystal pylons, and sparse blue-void columns. Three merged slab batches and locally generated grain replace the earlier busy concentric floor.
+- Larger cyan armored duelist with simple grouped arm/leg motion, lean while moving, ground contact, directional lighting and real shadow mapping. These are procedural transforms, not a claimed skeletal rig.
+- Reused, unchanged Chrome/Tripo GLB for large anchors; procedural angular skitters have a central eye and four legs. Actor screen sizes will be checked against the mockups in actual browser captures.
+- One white corner bracket identifies the stable automatic target. Enemy ground rings indicate exact center inclusion in the **5.4-unit** Pulse radius; decorative mesh overlap does not determine whether Pulse hits.
+- Cyan expanding Pulse ring and fill, target recoil/stun motion, short automatic-shot streaks, death shards and spawn markers. Reduced effects suppresses particles, flashes and walking/lean animation while retaining essential targeting/warnings.
+- Warm circular and lane warnings use the authoritative radius, width, center and heading. Warning fragments are visually clipped to the floor ellipse; this does not change collision state.
+
+No further Tripo generations, credits, API calls, or downloaded assets were used for v2. The runtime GLB bytes and hash above are unchanged. The lead owns the new HUD, mathematical rules and final state-to-image comparison; the scene's effects remain subordinate to those rules.

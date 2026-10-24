@@ -14,7 +14,7 @@ Visual thesis: big cyan combatant and faceted magenta threats on a close, calm s
 - Space **or** the large Pulse control: special action. No manual aim, weapon switch, right-click attack, dash or boost to learn.
 - Escape/pause; settings for volume, reduced effects and remapping.
 
-Ordinary Bolts automatically target a clearly marked nearby threat and deal exactly18HP, with unlimited ammunition. A stable target remains selected until it dies or becomes unavailable. Pulse affects nearby enemies inside a visible radius, removing one quarter of each target's HP at impact and briefly shoving/stunning them. Two charges refill on each wave. This creates a simple positioning/rescue choice: use it against urgent small attackers, catch multiple enemies, or save for an announced large arrival. It is not presented as a deep optimal-strategy puzzle.
+Ordinary Bolts automatically target a clearly marked threat anywhere in the compact arena and deal exactly18HP, with unlimited ammunition. A stable target remains selected until it dies or becomes unavailable. Pulse affects nearby enemies inside a visible radius, removing one quarter of each target's HP at impact and briefly shoving/stunning them. Two charges refill on each wave from wave2; the move-only opening has no Pulse control. This creates a simple positioning/rescue choice: use it against urgent small attackers, catch multiple enemies, or save for an announced large arrival. It is not presented as a deep optimal-strategy puzzle.
 
 ## First thirty seconds
 
