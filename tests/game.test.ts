@@ -12,6 +12,15 @@ const fixture = (encounter = 0) => {
   if (encounter) { g.encounter = encounter; g.setup(); }
   return g;
 };
+
+test('local event quantities are historical snapshots rather than mutable resource references', () => {
+  const g = fixture();
+  g.aim = {x:g.enemies[0].x,z:g.enemies[0].z};
+  assert.equal(g.fire('bolt'), true);
+  assert.deepEqual(g.ammo, {bolt:1,pulse:1});
+  const start = g.events.find(e=>e.event==='encounter-start')!;
+  assert.deepEqual((start.data as {ammo:typeof g.ammo}).ammo, {bolt:2,pulse:1});
+});
 const aim = (g: Game, enemyIndex: number) => {
   const target = g.enemies[enemyIndex];
   g.aim = { x: target.x, z: target.z };

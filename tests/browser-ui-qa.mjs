@@ -1,5 +1,6 @@
-// Independent production UI checks. All game changes use real controls; the only
-// game API invocation is the documented deterministic time hook.
+// Independent production UI checks use real controls except the explicitly
+// qualified blur-event fallback. No HP, resources, encounters, or wins are set;
+// the only game API invocation is the documented deterministic time hook.
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';

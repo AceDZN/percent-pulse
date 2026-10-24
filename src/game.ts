@@ -19,7 +19,7 @@ export class Game {
   ammo={bolt:2,pulse:1};boost={available:false,armed:false};cooldown=0;
   receipts:Receipt[]=[];receiptStart=0;events:{t:number;event:string;data:unknown}[]=[];
   lastMessage='';messageTime=0;preview=true;effectsReduced=false;nextHazard=1.8;hazardId=0;hurtCount=0;
-  log(event:string,data:unknown={}){this.events.push({t:+this.time.toFixed(3),event,data});if(this.events.length>500)this.events.shift();}
+  log(event:string,data:unknown={}){this.events.push({t:+this.time.toFixed(3),event,data:structuredClone(data)});if(this.events.length>500)this.events.shift();}
   start(){this.encounter=0;this.time=0;this.kills=0;this.retries=0;this.dashCount=0;this.hintUses=0;this.receipts=[];this.events=[];this.setup();}
   setup(){
     const c=ENCOUNTERS[this.encounter];this.mode='playing';this.elapsed=0;this.nextHazard=1.8;this.reason='';this.cooldown=0;this.hazards=[];this.shots=[];this.receiptStart=this.receipts.length;
