@@ -80,6 +80,7 @@ function tone(frequency: number, duration: number, strength = 1, end?: number) {
   o.connect(g).connect(audio.destination); o.start(); o.stop(audio.currentTime + duration);
 }
 function keyName(code: string) { return code === 'Space' ? 'רווח' : code.replace('Key', ''); }
+function touchControlsVisible() { return matchMedia('(pointer: coarse)').matches || document.body.classList.contains('force-touch'); }
 function clearInput() {
   keys.clear(); pointerHeld = false; touchMoving = false; stickPointer = -1; game.stop();
   ($('stick').querySelector('i') as HTMLElement).style.transform = '';
@@ -124,8 +125,10 @@ function updateUI(force = false) {
   $('pulse').querySelectorAll('.charge-row i').forEach((dot, i) => dot.classList.toggle('full', i < game.charges));
   $('touch-controls').classList.toggle('active', game.mode === 'playing');
   let coach = '';
-  if (game.mode === 'playing' && game.phase === 'move') coach = '<div class="key-cluster"><kbd>W</kbd><span><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span></div><div><strong>זוזו. הירי אוטומטי.</strong><span>חצים או לחיצה על הרצפה</span></div>';
-  else if (game.mode === 'playing' && game.phase === 'pulse-intro') coach = '<kbd>' + keyName(bindings.pulse) + '</kbd><div><strong>לחצו כדי לשחרר פעימה</strong><span>רבע מהחיים, ודחיפה שנותנת מרווח</span></div>';
+  if (game.mode === 'playing' && game.phase === 'move') coach = touchControlsVisible()
+    ? '<div><strong>גררו את המקל. הירי אוטומטי.</strong><span>אפשר גם לגעת ברצפה כדי לזוז</span></div>'
+    : '<div class="key-cluster"><kbd>' + keyName(bindings.up) + '</kbd><span><kbd>' + keyName(bindings.left) + '</kbd><kbd>' + keyName(bindings.down) + '</kbd><kbd>' + keyName(bindings.right) + '</kbd></span></div><div><strong>זוזו. הירי אוטומטי.</strong><span>חצים או לחיצה על הרצפה</span></div>';
+  else if (game.mode === 'playing' && game.phase === 'pulse-intro') coach = (touchControlsVisible() ? '' : '<kbd>' + keyName(bindings.pulse) + '</kbd>') + '<div><strong>' + (touchControlsVisible() ? 'לחצו על כפתור הפעימה' : 'לחצו כדי לשחרר פעימה') + '</strong><span>רבע מהחיים, ודחיפה שנותנת מרווח</span></div>';
   else if (game.mode === 'playing' && game.wave === 0 && game.waveTime < 4) coach = '<div><strong>ככה זה עובד. רק ממשיכים לזוז.</strong></div>';
   $('coach').innerHTML = coach;
   $('coach').hidden = !coach;
@@ -147,7 +150,8 @@ function updateUI(force = false) {
     uiMode = game.mode;
     const overlay = $('overlay'); overlay.className = game.mode === 'playing' ? 'hidden' : 'screen ' + game.mode;
     if (game.mode === 'title') {
-      overlay.innerHTML = '<div class="start-sheet"><p class="eyebrow">פשוט נכנסים ומשחקים.</p><h1>זוזו. הרובה יעשה את השאר.</h1><p>התחמקו מהאויבים ושחררו פעימה כשצריך מרווח.</p><button id="start-btn" class="primary">מתחילים <span>←</span></button><div class="start-controls"><span><bdi>WASD</bdi> / חצים / לחיצה — תנועה</span><span><bdi>' + keyName(bindings.pulse) + '</bdi> — פעימה</span></div><button id="quick-start" class="text-button">כבר הבנתי — כניסה בלי הדרכה</button></div>';
+      const startControls = touchControlsVisible() ? '<span>מקל תנועה / נגיעה ברצפה — תנועה</span><span>הכפתור הגדול — פעימה</span>' : '<span>חצים / לחיצה על הרצפה — תנועה</span><span><bdi>' + keyName(bindings.pulse) + '</bdi> — פעימה</span>';
+      overlay.innerHTML = '<div class="start-sheet"><p class="eyebrow">פשוט נכנסים ומשחקים.</p><h1>זוזו. הרובה יעשה את השאר.</h1><p>התחמקו מהאויבים ושחררו פעימה כשצריך מרווח.</p><button id="start-btn" class="primary">מתחילים <span>←</span></button><div class="start-controls">' + startControls + '</div><button id="quick-start" class="text-button">כבר הבנתי — כניסה בלי הדרכה</button></div>';
       $('start-btn').onclick = () => begin(true); $('quick-start').onclick = () => begin(false);
     } else if (game.mode === 'paused') {
       overlay.innerHTML = '<div class="pause-sheet"><p class="eyebrow">עוצרים לרגע</p><h2>ממשיכים כשנוח.</h2><button id="resume" class="primary">חזרה למשחק</button><button id="retry" class="quiet-button">להתחיל את הגל הזה מחדש</button><p>הרובה יורה לבד. זזים עם החצים או לחיצה על הרצפה.<br>פעימה: <bdi>' + keyName(bindings.pulse) + '</bdi> או הכפתור הגדול.</p></div>';
@@ -207,7 +211,7 @@ canvas.addEventListener('pointerdown', e => {
 canvas.addEventListener('pointermove', e => { if (pointerHeld) pointerDestination(e); });
 window.addEventListener('pointerup', () => { pointerHeld = false; });
 canvas.addEventListener('contextmenu', e => e.preventDefault());
-$('pulse').onpointerdown = e => { e.preventDefault(); pulseAction(); };
+$('pulse').onclick = pulseAction;
 $('pause').onclick = onPause;
 window.addEventListener('keydown', e => {
   if (options.open) return;
@@ -261,7 +265,7 @@ $('settings').onclick = () => {
 $('close-options').onclick = () => options.close();
 $('volume').oninput = e => { volume = Number((e.target as HTMLInputElement).value); saveSettings(); };
 $('reduced').onchange = e => { game.effectsReduced = (e.target as HTMLInputElement).checked; saveSettings(); };
-$('touch-mode').onchange = e => document.body.classList.toggle('force-touch', (e.target as HTMLInputElement).checked);
+$('touch-mode').onchange = e => { document.body.classList.toggle('force-touch', (e.target as HTMLInputElement).checked); uiMode = ''; updateUI(true); };
 $('reset-bindings').onclick = () => { bindings = { ...defaults }; bindingList(); saveSettings(); };
 $('skip-guide').onclick = () => { game.help(); game.skipGuidance(); options.close(); updateUI(true); };
 

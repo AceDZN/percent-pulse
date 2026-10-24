@@ -209,7 +209,8 @@ export function createScene(canvas:HTMLCanvasElement) {
   function hide(pool:Array<THREE.Object3D>){pool.forEach(o=>o.visible=false);}
   let lastX=0,lastZ=0,lastTime=0;
   function updateCamera(){
-    const aspect=width/Math.max(1,height),distance=Math.max(20,22/aspect);
+    // Narrow screens must include the playable ellipse plus actor width.
+    const aspect=width/Math.max(1,height),distance=Math.max(20,27/aspect);
     camera.position.set(focus.x,distance*.8192,focus.z+distance*.5736);camera.lookAt(focus.x,0,focus.z);camera.updateMatrixWorld();
     const fog=scene.fog as THREE.Fog;fog.near=distance+5;fog.far=distance+38;
   }
