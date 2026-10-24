@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-24",
+  "tool": "built-in image_gen",
+  "stage": "generated BEFORE v2 implementation",
+  "not_gameplay_captures": true,
+  "images": [
+    {
+      "file": "opening.png",
+      "sha256": "ee6734aaa148af4cb82d3ff2d32457da00cdddd54d24106431d156af78d34fcb"
+    },
+    {
+      "file": "combat.png",
+      "sha256": "cd7bf94d6547495b758ec577a11a6879cd2f5c9f082ba2852ea0fb311ddb7edd"
+    },
+    {
+      "file": "clear.png",
+      "sha256": "6375789656e42fcd948ba08f44de984e6b79e25b20d4e7951f12b6ada9913a42"
+    }
+  ],
+  "review": "Camera and action hierarchy accepted as design targets; generated Hebrew wave labels omit /8, so implementation uses correct authored HTML text."
+}
