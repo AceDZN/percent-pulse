@@ -199,6 +199,7 @@ export function createScene(canvas: HTMLCanvasElement) {
   function updateCamera() {
     const aspect = width / Math.max(1, height);
     const distance = Math.max(34, 46 / aspect);
+    const fog = scene.fog as THREE.Fog; fog.near = distance + 8; fog.far = distance + 54;
     camera.position.set(cameraFocus.x, distance * 0.8192, cameraFocus.z + distance * 0.5736);
     camera.lookAt(cameraFocus.x, 0, cameraFocus.z);
     camera.updateMatrixWorld();

@@ -60,7 +60,7 @@ The generated image at `docs/visual-targets/gameplay-v1.png` is a **design refer
 | Floating blue-black architecture | 34 faceted columns outside play, with occasional magenta channels. Foreground columns stay below the floor sightline. |
 | Agile cyan combatant | Original angular humanoid chest, shoulder wings, legs, visor and weapon; cyan saturation is tuned to remain cyan under cel lighting. |
 | Large magenta anchor | The actual Chrome-generated sentinel above a 1.25-radius targeting ring, with two compact procedural stone forearms. Generated width is normalized to 2.5 units. |
-| Pointed skitter | Original triangular/core mesh with four angled legs and a contrasting eye; its 0.72-radius state collider remains authoritative. |
+| Pointed skitter | Original triangular/core mesh with four angled legs and a contrasting eye; its rendered targeting ring has radius 0.72. Independent targeting code applies a 0.82 side tolerance as a small aiming allowance. |
 | Ground sweep arc | Exact RingGeometry span `0.85π`, radial interval `radius±width/2`, heading `atan2(dx,dz)`; strip/disc warnings remain supported. Fragments are clipped to the ellipse floor without changing authoritative collision. |
 | Cyan trail / magenta percentage impact | State-driven short beams and shrinking octahedral impact accents. The lead owns receipts and HUD placement. |
 | Current/max HP | World-space anchor label such as `72 / 96`; full skitter label `18 HP`; bar ratio uses actual current/max state. |

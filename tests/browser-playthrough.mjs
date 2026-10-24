@@ -6,7 +6,7 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
-const out='playtest-output/full';await fs.mkdir(out,{recursive:true});await fs.mkdir('docs/evidence',{recursive:true});
+const arcOnly=process.env.ARC_ONLY==='1';const out=arcOnly?'playtest-output/arc':'playtest-output/full';await fs.mkdir(out,{recursive:true});await fs.mkdir('docs/evidence',{recursive:true});
 const browser=await chromium.launch({channel:'chrome',headless:true,args:['--enable-unsafe-swiftshader']});
 const page=await browser.newPage({viewport:{width:1672,height:941},deviceScaleFactor:1});
 page.setDefaultTimeout(60000);const errors=[],failed=[],remote=[],badResponses=[];
@@ -23,6 +23,15 @@ while(guard++<3500){
   if(s.mode==='failed'){await movement(0,0);await page.waitForTimeout(150);await page.screenshot({path:`${out}/failure-${retries}.png`});history.push({failure:s});if(++retries>3)throw new Error('More than three retries');await page.locator('#retry').click({force:true});waypoint=0;dashAt=s.time;continue;}
   if(s.mode==='interlude'){await movement(0,0);await page.waitForTimeout(150);await page.screenshot({path:`${out}/clear-${s.encounter}.png`});await advance(8100);continue;}
   if(s.mode!=='playing')throw new Error('Unexpected mode '+s.mode);
+  if(arcOnly&&s.encounter===2&&s.hazards.some(h=>h.kind==='arc'&&h.charge>.25&&h.charge<.85)){
+    await movement(0,0);await advance(0);await page.waitForTimeout(150);await page.screenshot({path:'docs/evidence/arc-telegraph.png'});
+    const anchorState=await state();
+    const intervals=await page.evaluate(()=>new Promise(resolve=>{const a=[];let prev=performance.now();function sample(t){a.push(t-prev);prev=t;if(a.length===121)resolve(a.slice(1));else requestAnimationFrame(sample);}requestAnimationFrame(sample);}));
+    const sorted=[...intervals].sort((a,b)=>a-b);const mean=intervals.reduce((a,b)=>a+b,0)/intervals.length;
+    const gpu=await page.evaluate(()=>{const gl=document.querySelector('canvas').getContext('webgl2');const ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):'unavailable';});
+    const measurement={context:'Frozen encounter2 scene; real requestAnimationFrame intervals; deterministic simulation held, render/HUD active. Host simultaneously running other game crews; not a device benchmark.',browser:await browser.version(),gpu,viewport:'1672x941 DPR1',frames:intervals.length,meanMs:mean,medianMs:sorted[Math.floor(sorted.length/2)],p95Ms:sorted[Math.floor(sorted.length*.95)],minMs:sorted[0],maxMs:sorted.at(-1),rendering:anchorState.rendering,state:anchorState,errors,failed,remote,badResponses};
+    await fs.writeFile('docs/evidence/frame-measurement.json',JSON.stringify(measurement,null,2));console.log(JSON.stringify({arcCaptured:true,...measurement, state:undefined}));await browser.close();process.exit(0);
+  }
   if(s.encounter!==lastEncounter){lastEncounter=s.encounter;waypoint=0;history.push({encounter:s.encounter,ammo:s.ammo,preview:s.preview});if(s.encounter===5)assert.equal(s.preview,false);}
   let wp=route[waypoint];if(Math.hypot(s.player.x-wp.x,s.player.z-wp.z)<1.1){waypoint=(waypoint+1)%route.length;wp=route[waypoint];}
   let dx=wp.x-s.player.x,dz=wp.z-s.player.z;
@@ -33,7 +42,7 @@ while(guard++<3500){
     }else if(h.kind==='arc'){const d=Math.hypot(ex,ez);if(Math.abs(d-h.radius)<3.7){let sign=d>h.radius?1:-1;if(Math.hypot((s.player.x+ex/d*sign*4)/16.1,(s.player.z+ez/d*sign*4)/11.1)>1)sign=-sign;dx=ex/d*sign;dz=ez/d*sign;}}else if(Math.hypot(ex,ez)<4){dx=ex||1;dz=ez||-1;}
   }
   await movement(dx,dz);
-  const fast=s.enemies.find(e=>e.family==='skitter'),enemy=(s.encounter===2&&s.ammo.pulse===2?s.enemies.find(e=>e.family==='anchor'):undefined)||fast||s.enemies[0];
+  const fast=s.enemies.find(e=>e.family==='skitter'),enemy=(arcOnly&&s.encounter===2&&s.ammo.pulse<2?null:(s.encounter===2&&s.ammo.pulse===2?s.enemies.find(e=>e.family==='anchor'):undefined)||fast||s.enemies[0]);
   if(enemy&&s.cooldown<.001){
     const screen=s.screen.enemies.find(e=>e.id===enemy.id);await page.mouse.move(screen.x,screen.y);
     if(s.encounter===4&&enemy.maxHp===27&&s.boost.available&&!s.boost.armed)await page.keyboard.press('KeyE');

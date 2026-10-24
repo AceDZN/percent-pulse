@@ -26,6 +26,7 @@ export class Game {
     this.player={x:0,z:7,angle:Math.PI,hp:100,dashTime:0,dashCooldown:0,invulnerable:1.2};this.moveInput={x:0,z:0};
     this.ammo={bolt:c.ammo[0],pulse:c.ammo[1]};this.boost={available:this.encounter===3,armed:false};this.preview=this.encounter<4;
     this.enemies=c.hp.map((hp,i)=>({id:this.encounter*10+i+1,x:i===0?0:8,z:i===0?-5:1,angle:0,hp:new Rational(hp),maxHp:hp,family:(hp<=36?'skitter':'anchor') as Enemy['family'],phase:'pursue',telegraph:0,hitFlash:0}));
+    if(this.encounter===4){this.enemies[0].x=-6;this.enemies[0].z=-3;this.enemies[1].x=7;this.enemies[1].z=-6;}
     this.lastMessage=this.encounter===0?'זוזו מהפס לפני הפגיעה. רווח מזנק דרך הסכנה.':this.encounter===3?'תגבור זמין: הפעילו E לפני הפגיעה הרצויה.':this.encounter===4?'ערכים חדשים. בחרו את הירייה בלי תצוגת נזק מוקדמת.':'טהרו את הזירה ושרדו עד תום המחזור.';this.messageTime=6;this.log('encounter-start',{encounter:this.encounter+1,ammo:this.ammo});
   }
   retry(){if(this.mode==='failed'||this.mode==='paused'){this.retries++;this.log('retry',{encounter:this.encounter+1});this.setup();}}

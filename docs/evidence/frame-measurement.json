@@ -1,0 +1,222 @@
+{
+  "context": "Frozen encounter2 scene; real requestAnimationFrame intervals; deterministic simulation held, render/HUD active. Host simultaneously running other game crews; not a device benchmark.",
+  "browser": "155.0.8059.85",
+  "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2 Max, Unspecified Version)",
+  "viewport": "1672x941 DPR1",
+  "frames": 120,
+  "meanMs": 16.666666666666668,
+  "medianMs": 16.69999999999709,
+  "p95Ms": 16.69999999999709,
+  "minMs": 16.59999999999127,
+  "maxMs": 16.80000000000291,
+  "rendering": {
+    "calls": 196,
+    "triangles": 46418,
+    "width": 1672,
+    "height": 941,
+    "dpr": 1,
+    "modelStatus": "Tripo pulse-sentinel.glb loaded",
+    "camera": {
+      "x": 0.589350681453051,
+      "y": 27.852800000000002,
+      "z": 19.262142614404517,
+      "elevation": 55
+    }
+  },
+  "state": {
+    "coordinates": "x right, z down (+z toward camera); floor y=0; player center within exact ellipse (x/16.1)^2+(z/11.1)^2<=1; arc heading atan2(dx,dz), span 0.85PI, width radial",
+    "mode": "playing",
+    "encounter": 2,
+    "name": "שני איומים",
+    "time": 40.78,
+    "cycleRemaining": 56.23,
+    "player": {
+      "x": 9.822511357549036,
+      "z": -4.805147711909422,
+      "angle": -1.5556204250090806,
+      "hp": 100,
+      "dashTime": 0,
+      "dashCooldown": 0,
+      "invulnerable": 0
+    },
+    "aim": {
+      "x": 0.30527768588353266,
+      "z": -4.660704019419569
+    },
+    "enemies": [
+      {
+        "id": 11,
+        "x": 1.7297679975066766,
+        "z": -3.1226906449226197,
+        "angle": 1.7757734966235275,
+        "hp": 72,
+        "maxHp": 96,
+        "family": "anchor",
+        "phase": "pursue",
+        "telegraph": 0,
+        "hitFlash": 0,
+        "hpExact": "72"
+      },
+      {
+        "id": 12,
+        "x": 10.433904780469796,
+        "z": -0.5978789246210283,
+        "angle": -2.9972844363957387,
+        "hp": 18,
+        "maxHp": 18,
+        "family": "skitter",
+        "phase": "pursue",
+        "telegraph": 0,
+        "hitFlash": 0,
+        "hpExact": "18"
+      }
+    ],
+    "hazards": [
+      {
+        "id": 10,
+        "x": 1.4693530718302434,
+        "z": -3.049056293777426,
+        "radius": 10.780894105691258,
+        "angle": 1.8978838868741175,
+        "width": 2.4,
+        "kind": "arc",
+        "charge": 0.2626262626262626,
+        "age": 0.4333333333333333,
+        "duration": 1.65,
+        "hit": false
+      }
+    ],
+    "ammo": {
+      "bolt": 4,
+      "pulse": 1
+    },
+    "boost": {
+      "available": false,
+      "armed": false
+    },
+    "cooldown": 0,
+    "preview": true,
+    "receipts": [
+      {
+        "time": 35.167,
+        "target": 11,
+        "kind": "pulse",
+        "before": "96",
+        "raw": "24",
+        "applied": "24",
+        "after": "72",
+        "boosted": false
+      }
+    ],
+    "kills": 1,
+    "dashes": 6,
+    "retries": 0,
+    "hintUses": 0,
+    "reason": "",
+    "screen": {
+      "player": {
+        "x": 1137.1571825176957,
+        "y": 348.5336031132468
+      },
+      "enemies": [
+        {
+          "id": 11,
+          "x": 874.2036262408221,
+          "y": 391.4017165140611
+        },
+        {
+          "id": 12,
+          "x": 1179.7512020273045,
+          "y": 460.2708662433318
+        }
+      ]
+    },
+    "assets": "Tripo pulse-sentinel.glb loaded",
+    "rendering": {
+      "calls": 196,
+      "triangles": 46418,
+      "width": 1672,
+      "height": 941,
+      "dpr": 1,
+      "modelStatus": "Tripo pulse-sentinel.glb loaded",
+      "camera": {
+        "x": 0.589350681453051,
+        "y": 27.852800000000002,
+        "z": 19.262142614404517,
+        "elevation": 55
+      }
+    },
+    "settings": {
+      "volume": 0.25,
+      "reduced": false,
+      "bindings": {
+        "up": "KeyW",
+        "down": "KeyS",
+        "left": "KeyA",
+        "right": "KeyD",
+        "pulse": "KeyQ",
+        "dash": "Space",
+        "boost": "KeyE",
+        "bolt": "KeyJ"
+      }
+    },
+    "localEvents": [
+      {
+        "t": 33.95,
+        "event": "avoided",
+        "data": {
+          "hazard": "sweep"
+        }
+      },
+      {
+        "t": 35.017,
+        "event": "encounter-cleared",
+        "data": {
+          "encounter": 1,
+          "elapsed": 35.01666666666596
+        }
+      },
+      {
+        "t": 35.017,
+        "event": "encounter-start",
+        "data": {
+          "encounter": 2,
+          "ammo": {
+            "bolt": 4,
+            "pulse": 1
+          }
+        }
+      },
+      {
+        "t": 35.167,
+        "event": "hit",
+        "data": {
+          "time": 35.167,
+          "target": 11,
+          "kind": "pulse",
+          "before": "96",
+          "raw": "24",
+          "applied": "24",
+          "after": "72",
+          "boosted": false
+        }
+      },
+      {
+        "t": 38.383,
+        "event": "dash",
+        "data": {}
+      },
+      {
+        "t": 38.483,
+        "event": "avoided",
+        "data": {
+          "hazard": "sweep"
+        }
+      }
+    ]
+  },
+  "errors": [],
+  "failed": [],
+  "remote": [],
+  "badResponses": []
+}

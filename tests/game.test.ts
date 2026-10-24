@@ -160,6 +160,7 @@ test('a wrong mixed order leaves exact positive HP and retry recovers resources'
 test('transfer starts with changed values, preview off, and no automatic hint use', () => {
   const g = fixture(4);
   assert.deepEqual(g.enemies.map(e => e.hp.toString()), ['120', '36']);
+  assert.deepEqual(g.enemies.map(e => ({x:e.x,z:e.z})), [{x:-6,z:-3},{x:7,z:-6}], 'transfer uses a new opposing formation');
   assert.deepEqual(g.ammo, { bolt: 6, pulse: 2 });
   assert.equal(g.preview, false);
   assert.equal(g.hintUses, 0);
