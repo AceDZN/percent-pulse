@@ -29,7 +29,7 @@ Do not stop another process if a port is occupied. The verified production previ
 | Pause / retry / optional explanation | Escape / pause button | Pause button |
 | Fullscreen | F; Escape exits | Browser fullscreen when available |
 
-Settings provide keyboard remapping, volume/mute, reduced effects, preview toggle and visible touch controls. Losing focus pauses combat and clears held input. Opening settings freezes the simulation, including interludes.
+Settings provide keyboard remapping, volume/mute, reduced effects, preview toggle and visible touch controls. Blur/visibility handlers and a frame watchdog pause combat and clear held input; native tab switching under debugger instrumentation remains unverified (see PLAYTEST.md). Opening settings freezes the simulation, including interludes.
 
 ## Implemented rules
 
